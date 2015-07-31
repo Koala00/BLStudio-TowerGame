@@ -86,11 +86,30 @@
     <Compile Include="Assets\_Imports\Scripts\Unit.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\_Imports\Hexagon.obj" />
+    <None Include="Assets\_Imports\Materials\Color Blue.mat" />
+    <None Include="Assets\_Imports\Materials\Color Red.mat" />
+    <None Include="Assets\_Imports\Materials\Color _defaultMat.mat" />
+    <None Include="Assets\_Imports\Materials\HexagonTiling.mat" />
+    <None Include="Assets\_Imports\Materials\pCone1Mat.mat" />
+    <None Include="Assets\_Imports\Materials\Watchtower_Fortress.mat" />
+    <None Include="Assets\_Imports\WatchTower\Fortress Watchtower.tga" />
     <None Include="Assets\_Imports\WatchTower\ReadMe.txt" />
     <None Include="Assets\_Imports\readme.txt" />
+    <None Include="Assets\_Imports\WatchTower\Watchtower_Entrance.FBX" />
+    <None Include="Assets\_Imports\WatchTower\Watchtower_Entrance.prefab" />
+    <None Include="Assets\_Imports\WatchTower\Watchtower_Flag_Pole.FBX" />
+    <None Include="Assets\_Imports\WatchTower\Watchtower_Flag_Pole.prefab" />
+    <None Include="Assets\_Imports\WatchTower\Watchtower_Main.FBX" />
+    <None Include="Assets\_Imports\WatchTower\Watchtower_Main.prefab" />
+    <None Include="Assets\_Imports\WatchTower\Watchtower_Window.FBX" />
+    <None Include="Assets\_Imports\WatchTower\Watchtower_Window.prefab" />
     <None Include="Assets\_Scenes\Scene.unity" />
     <None Include="Assets\_Scenes\WatchTower.unity" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="Assets\_Imports\HexagonTiling.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
