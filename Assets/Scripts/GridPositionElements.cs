@@ -17,7 +17,8 @@ class GridPositionElements
 
     public static void updateElements (Vector3 position, int player, actions updateAction)
     {
-
+        // TODO: put color on elements, for player with majority
+        // TODO: update score => score is a member of GridPositionElements
     }
 
     public static int calculateDistance(Vector3 position1, Vector3 position2)
