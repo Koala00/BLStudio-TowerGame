@@ -97,7 +97,8 @@ public class Towers : MonoBehaviour {
 
     private static int calculateDistance(Vector3 position1, Vector3 position2)
     {
-        // TODO
-        return 0;
+        var hexPos1 = new HexPosition(position1);
+        var hexPos2 = new HexPosition(position2);
+        return hexPos1.dist(hexPos2);
     }
 }
