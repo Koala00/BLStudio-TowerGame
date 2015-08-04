@@ -14,7 +14,7 @@ sysinfo.txt
 /*.userprefs
 /*.csproj
 /*.pidb
-/*.suo
+*.suo
 /*.sln*
 /*.user
 /*.unityproj
