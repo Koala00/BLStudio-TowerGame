@@ -71,8 +71,6 @@ public class Towers : MonoBehaviour {
             {
                 int selectedTower = Random.Range(0, towersInReach.Count - 1);
                 towersInReach[selectedTower].life -= 1;
-                Debug.Log(towersInReach[selectedTower].life);
-                Debug.Log(towersInReach[selectedTower].coordinates);
             }
         }
 
@@ -90,6 +88,9 @@ public class Towers : MonoBehaviour {
         foreach (TowerElement tower in toRemove)
         {
             Destroy(tower.towerObject);
+
+            HexPosition position = new HexPosition(tower.coordinates);
+            position.unselect("Player" + tower.playerNumber);
             towersList.Remove(tower);
         }
     }
