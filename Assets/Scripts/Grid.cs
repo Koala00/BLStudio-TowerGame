@@ -64,6 +64,7 @@ public class Grid : MonoBehaviour
                 {
                     Towers.createTower(towerSample, mouse.getPosition());
                     mouse.select("Player1");
+                    endTurn();
                 }
             }
         }
@@ -73,5 +74,12 @@ public class Grid : MonoBehaviour
             if (mouse != null) mouse.unselect("Cursor");
             mouse = null;
         }
+    }
+
+    // endTurn
+    public void endTurn ()
+    {
+        // TODO: call UI endTurn
+        Towers.endTurn();
     }
 }

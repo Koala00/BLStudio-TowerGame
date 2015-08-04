@@ -45,4 +45,9 @@ public class Towers : MonoBehaviour {
 
         return null;
     }
+
+    public static void endTurn()
+    {
+        // TODO: implement
+    }
 }
