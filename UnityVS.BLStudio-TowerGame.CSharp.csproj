@@ -74,7 +74,7 @@
     <Compile Include="Assets\Scripts\GridPositionElements.cs" />
     <Compile Include="Assets\Scripts\KeyboardCameraControl.cs" />
     <Compile Include="Assets\Scripts\MouseCameraControl.cs" />
-    <Compile Include="Assets\Scripts\Towers.cs" />
+    <Compile Include="Assets\Scripts\GridTowers.cs" />
     <Compile Include="Assets\_Imports\Scripts\AI.cs" />
     <Compile Include="Assets\_Imports\Scripts\AStar.cs" />
     <Compile Include="Assets\_Imports\Scripts\HexEntry.cs" />
