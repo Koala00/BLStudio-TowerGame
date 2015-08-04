@@ -68,8 +68,7 @@ public class Grid : MonoBehaviour
                 // add a new tower
                 if (Input.GetMouseButtonDown(0))
                 {
-                    //Towers.createTower(towerSample, mouse.getPosition(), CurrentPlayer);
-                    Towers.createTower(towerSample, mouse.getPosition());
+                    Towers.createTower(towerSample, mouse.getPosition(), CurrentPlayer);
                     mouse.select("Player" + CurrentPlayer);
                     endTurn();
                 }
