@@ -22,7 +22,7 @@ public class Grid : MonoBehaviour
         HexPosition.setColor("Selectable", Color.green, 2);
         HexPosition.setColor("Selection", Color.yellow, 3);
         for (int i = 0; i < NUM_PLAYERS; i++)
-          HexPosition.setColor("Player" + i , PlayerColors[i % PlayerColors.Length], 4 + i);
+          HexPosition.setColor("Player" + i , GetPlayerColor(i), 4 + i);
         HexPosition.Marker = marker;
         UpdatePlayerLabel();
         towerSample.SetActive(false);
@@ -92,6 +92,13 @@ public class Grid : MonoBehaviour
 
     private void UpdatePlayerLabel()
     {
-        PlayerNameLabel.GetComponent<UnityEngine.UI.Text>().text = "Player " + (CurrentPlayer + 1);
+        var label = PlayerNameLabel.GetComponent<UnityEngine.UI.Text>();
+        label.text = "Player " + (CurrentPlayer + 1);
+        label.color = GetPlayerColor(CurrentPlayer);
+    }
+
+    private Color GetPlayerColor(int player)
+    {
+        return PlayerColors[player % PlayerColors.Length];
     }
 }
