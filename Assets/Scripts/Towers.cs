@@ -77,13 +77,20 @@ public class Towers : MonoBehaviour {
         }
 
         // remove towers with no life left
+        List<TowerElement> toRemove = new List<TowerElement>();
+
         foreach (TowerElement tower in towersList)
         {
             if (tower.life <= 0)
             {
-                Destroy(tower.towerObject);
-                towersList.Remove(tower);
+                toRemove.Add(tower);
             }
+        }
+
+        foreach (TowerElement tower in toRemove)
+        {
+            Destroy(tower.towerObject);
+            towersList.Remove(tower);
         }
     }
 
