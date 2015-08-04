@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class Towers : MonoBehaviour {
 
+    public static int reachDistance = 1;
+
     private static List<TowerElement> towersList = new List<TowerElement>();
 
     void Start() { }
@@ -13,10 +15,12 @@ public class Towers : MonoBehaviour {
     {
         public GameObject towerObject;
         public Vector3 coordinates;
+        public int playerNumber;
+        public int life = 10;
     }
 
     // create a new tower at selected position
-    public static void createTower (GameObject towerSample, Vector3 position)
+    public static void createTower (GameObject towerSample, Vector3 position, int playerNumber)
     {
         // check if tower does not already exists, before creating new tower
         if (getTower(position) == null)
@@ -28,6 +32,7 @@ public class Towers : MonoBehaviour {
             TowerElement tower = new TowerElement();
             tower.towerObject = newTower;
             tower.coordinates = position;
+            tower.playerNumber = playerNumber;
 
             towersList.Add(tower);
         }
@@ -48,6 +53,43 @@ public class Towers : MonoBehaviour {
 
     public static void endTurn()
     {
-        // TODO: implement
+        foreach (TowerElement sourceTower in towersList)
+        {
+            List<TowerElement> towersInReach = new List<TowerElement>();
+
+            foreach (TowerElement targetTower in towersList)
+            {   // count towers in reach = not same position and not same player number ; and distance < 2)
+                if (!((sourceTower.coordinates.Equals(targetTower.coordinates))))
+                // if (! ((sourceTower.coordinates.Equals(targetTower.coordinates)) || (sourceTower.playerNumber.Equals(targetTower.playerNumber))))
+                {
+                    if (calculateDistance(sourceTower.coordinates, targetTower.coordinates) <= Towers.reachDistance)
+                        towersInReach.Add(targetTower);
+                }
+            }
+
+            if (towersInReach.Count > 0)
+            {
+                int selectedTower = Random.Range(0, towersInReach.Count - 1);
+                towersInReach[selectedTower].life -= 1;
+                Debug.Log(towersInReach[selectedTower].life);
+                Debug.Log(towersInReach[selectedTower].coordinates);
+            }
+        }
+
+        // remove towers with no life left
+        foreach (TowerElement tower in towersList)
+        {
+            if (tower.life <= 0)
+            {
+                Destroy(tower.towerObject);
+                towersList.Remove(tower);
+            }
+        }
+    }
+
+    private static int calculateDistance(Vector3 position1, Vector3 position2)
+    {
+        // TODO
+        return 0;
     }
 }
