@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Towers : MonoBehaviour {
+public class GridTowers {
 
     public static int reachDistance = 1;
 
@@ -58,11 +58,10 @@ public class Towers : MonoBehaviour {
             List<TowerElement> towersInReach = new List<TowerElement>();
 
             foreach (TowerElement targetTower in towersList)
-            {   // count towers in reach = not same position and not same player number ; and distance < 2)
-                if (!((sourceTower.coordinates.Equals(targetTower.coordinates))))
-                // if (! ((sourceTower.coordinates.Equals(targetTower.coordinates)) || (sourceTower.playerNumber.Equals(targetTower.playerNumber))))
+            {   // count towers in reach = not same position and not same player number ; and distance < x)
+                if (! ((sourceTower.coordinates.Equals(targetTower.coordinates)) || (sourceTower.playerNumber.Equals(targetTower.playerNumber))))
                 {
-                    if (calculateDistance(sourceTower.coordinates, targetTower.coordinates) <= Towers.reachDistance)
+                    if (GridPositionElements.calculateDistance(sourceTower.coordinates, targetTower.coordinates) <= GridTowers.reachDistance)
                         towersInReach.Add(targetTower);
                 }
             }
@@ -87,18 +86,11 @@ public class Towers : MonoBehaviour {
 
         foreach (TowerElement tower in toRemove)
         {
-            Destroy(tower.towerObject);
+            Object.Destroy(tower.towerObject);
 
             HexPosition position = new HexPosition(tower.coordinates);
             position.unselect("Player" + tower.playerNumber);
             towersList.Remove(tower);
         }
-    }
-
-    private static int calculateDistance(Vector3 position1, Vector3 position2)
-    {
-        var hexPos1 = new HexPosition(position1);
-        var hexPos2 = new HexPosition(position2);
-        return hexPos1.dist(hexPos2);
     }
 }
