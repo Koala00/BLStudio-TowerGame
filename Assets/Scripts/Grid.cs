@@ -4,8 +4,14 @@ using System.Collections.Generic;
 
 public class Grid : MonoBehaviour
 {
+    public int NUM_PLAYERS = 2;
+
     public GameObject marker;
     public GameObject towerSample;
+    public GameObject PlayerNameLabel;
+    private int CurrentPlayer = 0;
+
+    private Color[] PlayerColors = { Color.magenta, Color.cyan, Color.red, Color.green };
 
     private HexPosition mouse = null;
 
@@ -15,10 +21,10 @@ public class Grid : MonoBehaviour
         HexPosition.setColor("Cursor", Color.blue, 1);
         HexPosition.setColor("Selectable", Color.green, 2);
         HexPosition.setColor("Selection", Color.yellow, 3);
-        HexPosition.setColor("Player1", Color.magenta, 4);
-        HexPosition.setColor("Player2", Color.cyan, 5);
+        for (int i = 0; i < NUM_PLAYERS; i++)
+          HexPosition.setColor("Player" + i , PlayerColors[i % PlayerColors.Length], 4 + i);
         HexPosition.Marker = marker;
-
+        UpdatePlayerLabel();
         towerSample.SetActive(false);
     }
 
@@ -62,8 +68,9 @@ public class Grid : MonoBehaviour
                 // add a new tower
                 if (Input.GetMouseButtonDown(0))
                 {
+                    //Towers.createTower(towerSample, mouse.getPosition(), CurrentPlayer);
                     Towers.createTower(towerSample, mouse.getPosition());
-                    mouse.select("Player1");
+                    mouse.select("Player" + CurrentPlayer);
                     endTurn();
                 }
             }
@@ -79,7 +86,13 @@ public class Grid : MonoBehaviour
     // endTurn
     public void endTurn ()
     {
-        // TODO: call UI endTurn
+        CurrentPlayer = (CurrentPlayer + 1) % NUM_PLAYERS;
+        UpdatePlayerLabel();
         Towers.endTurn();
+    }
+
+    private void UpdatePlayerLabel()
+    {
+        PlayerNameLabel.GetComponent<UnityEngine.UI.Text>().text = "Player " + (CurrentPlayer + 1);
     }
 }
