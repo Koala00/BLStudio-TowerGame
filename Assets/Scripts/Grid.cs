@@ -80,6 +80,6 @@ public class Grid : MonoBehaviour
     public void endTurn ()
     {
         // TODO: call UI endTurn
-        // TODO: call TowerList endTurn
+        Towers.endTurn();
     }
 }
