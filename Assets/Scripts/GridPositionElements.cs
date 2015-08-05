@@ -23,7 +23,7 @@ class GridPositionElements
 
         public PositionControl (Vector3 position)
         {
-            cellColoring = (GameObject) GameObject.Instantiate(sampleCellColored, new Vector3(position.x, 0.001f , position.z), sampleCellColored.transform.rotation);
+            cellColoring = (GameObject) GameObject.Instantiate(sampleCellColored, new Vector3(position.x, 0.01f , position.z), sampleCellColored.transform.rotation);
         }
 
         public void IncreaseControl(int player)
