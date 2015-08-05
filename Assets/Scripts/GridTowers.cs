@@ -4,8 +4,6 @@ using System.Collections.Generic;
 
 public class GridTowers {
 
-    public static int reachDistance = 1;
-
     private static List<TowerElement> towersList = new List<TowerElement>();
 
     void Start() { }
@@ -22,10 +20,14 @@ public class GridTowers {
     // create a new tower at selected position
     public static void createTower (GameObject towerSample, Vector3 position, int playerNumber)
     {
+        // check borders
+        if ((position.x >= ConfigurationElements.board_size_x) || (position.z >= ConfigurationElements.board_size_z))
+            return;
+
         // check if tower does not already exists, before creating new tower
         if (getTower(position) == null)
         {
-            // Debug.Log("New Tower instance; position=" + position);
+            Debug.Log("New Tower instance; position=" + position);
             GameObject newTower = (GameObject)GameObject.Instantiate(towerSample, position, towerSample.transform.rotation);
             newTower.SetActive(true);
 
@@ -35,6 +37,9 @@ public class GridTowers {
             tower.playerNumber = playerNumber;
 
             towersList.Add(tower);
+
+            // put color on tile
+            (new HexPosition(position)).select("Player" + playerNumber);
         }
     }
 
@@ -61,7 +66,7 @@ public class GridTowers {
             {   // count towers in reach = not same position and not same player number ; and distance < x)
                 if (! ((sourceTower.coordinates.Equals(targetTower.coordinates)) || (sourceTower.playerNumber.Equals(targetTower.playerNumber))))
                 {
-                    if (GridPositionElements.calculateDistance(sourceTower.coordinates, targetTower.coordinates) <= GridTowers.reachDistance)
+                    if (GridPositionElements.calculateDistance(sourceTower.coordinates, targetTower.coordinates) <= ConfigurationElements.towers_reachDistance)
                         towersInReach.Add(targetTower);
                 }
             }

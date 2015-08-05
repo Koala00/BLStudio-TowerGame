@@ -69,7 +69,6 @@ public class Grid : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     GridTowers.createTower(towerSample, mouse.getPosition(), CurrentPlayer);
-                    mouse.select("Player" + CurrentPlayer);
                     endTurn();
                 }
             }
