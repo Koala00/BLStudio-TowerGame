@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class HexInfo : MonoBehaviour
+public class GridCellFiller : MonoBehaviour
 {
     //basic hexagon mesh making
     public Vector3[] Vertices;
     public Vector2[] uv;
     public int[] Triangles;
-    public Texture texture;
 
     void Start()
     {
@@ -56,9 +55,20 @@ public class HexInfo : MonoBehaviour
 
         #region finalize
         //add a mesh filter to the GO the script is attached to; cache it for later
-        MeshFilter meshFilter = gameObject.AddComponent<MeshFilter>();
+        MeshFilter meshFilter;
+        if (gameObject.GetComponent<MeshFilter>() == null)
+        {
+            meshFilter = gameObject.AddComponent<MeshFilter>();
+        } else
+        {
+            meshFilter = gameObject.GetComponent<MeshFilter>();
+        }
+
         //add a mesh renderer to the GO the script is attached to
-        gameObject.AddComponent<MeshRenderer>();
+        if (gameObject.GetComponent<MeshRenderer>() == null)
+        {
+            gameObject.AddComponent<MeshRenderer>();
+        }
 
         //create a mesh object to pass our data into
         Mesh mesh = new Mesh();
@@ -77,7 +87,7 @@ public class HexInfo : MonoBehaviour
         meshFilter.mesh = mesh;
 
         //UV TESTING
-        gameObject.GetComponent<Renderer>().material.mainTexture = texture;
+        // gameObject.GetComponent<Renderer>().material.color = Color.red;
         #endregion
 
     }

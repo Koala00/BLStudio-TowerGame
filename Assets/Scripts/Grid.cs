@@ -6,8 +6,9 @@ using System;
 
 public class Grid : MonoBehaviour
 {
-    public GameObject marker;
-    public GameObject towerSample;
+    public GameObject sampleCellEmptyMarker;
+    public GameObject sampleCellFullMarker;
+    public GameObject sampleTower;
     public GameObject canvas;
 
     private HexPosition mouse = null;
@@ -16,13 +17,18 @@ public class Grid : MonoBehaviour
     void Start()
     {
         HexPosition.setColor("Cursor", Color.blue, 1);
+        GridPositionElements.sampleCellColored = sampleCellFullMarker;
+
+        /* - not wanted / color set inside instead of borders
         HexPosition.setColor("Selectable", Color.green, 2);
         HexPosition.setColor("Selection", Color.yellow, 3);
         for (int i = 0; i < Player.Count; i++)
           HexPosition.setColor("Player" + i , Player.GetColor(i), 4 + i);
-        HexPosition.Marker = marker;
+        */
+
+        HexPosition.Marker = sampleCellEmptyMarker;
         UpdateUi();
-        towerSample.SetActive(false);
+        sampleTower.SetActive(false);
     }
 
     // Update is called once per frame
@@ -65,7 +71,7 @@ public class Grid : MonoBehaviour
                 // add a new tower
                 if (Input.GetMouseButtonDown(0))
                 {
-                    if (GridTowers.createTower(towerSample, mouse.getPosition(), Player.Current))
+                    if (GridTowers.createTower(sampleTower, mouse.getPosition(), Player.Current))
                         endTurn();
                 }
             }
@@ -88,6 +94,7 @@ public class Grid : MonoBehaviour
 
     private void UpdateUi()
     {
+        GridPositionElements.updateColors();
         ExecuteEvents.Execute<IUpdateUi>(canvas, null, (msg, data) => msg.SetCurrentPlayer());
         int[] scores = GridPositionElements.GetNumberOfControlledPositionsPerPlayer();
         ExecuteEvents.Execute<IUpdateUi>(canvas, null, (msg, data) => msg.SetScores(scores));

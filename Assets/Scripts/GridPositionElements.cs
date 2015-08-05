@@ -7,16 +7,24 @@ using UnityEngine.Assertions;
 
 class GridPositionElements
 {
+    public static GameObject sampleCellColored;
+
     private static Dictionary<HexPosition, PositionControl> PositionControls = new Dictionary<HexPosition, PositionControl>();
 
     /// <summary>
     /// Keeps track of which player controls the position.
-    /// </summary>
     /// When a tower is placed that affects the position, its control of the position is increased.
+    /// </summary>
     public class PositionControl
     {
         private int[] ControlOfPlayer = new int[Player.Count];
         public int TowerOfPlayer = Player.NoPlayer; // If occupied by a tower of a player, this contains the player number.
+        public GameObject cellColoring;
+
+        public PositionControl (Vector3 position)
+        {
+            cellColoring = (GameObject) GameObject.Instantiate(sampleCellColored, new Vector3(position.x, 0.001f , position.z), sampleCellColored.transform.rotation);
+        }
 
         public void IncreaseControl(int player)
         {
@@ -29,6 +37,25 @@ class GridPositionElements
             Assert.IsTrue(player >= 0 && player < Player.Count);
             if (ControlOfPlayer[player] > 0)
               ControlOfPlayer[player]--;
+        }
+
+        public void UpdateColor()
+        {
+            if (TowerOfPlayer.Equals(Player.NoPlayer)) // position contains no tower
+            {
+                int playerInControl = GetPlayerInControl();
+                if (playerInControl.Equals(-1))
+                    cellColoring.SetActive(false);
+                else
+                {
+                    cellColoring.SetActive(true);
+                    cellColoring.GetComponent<Renderer>().material.color = ConfigurationElements.playersColor[GetPlayerInControl()];
+                }
+            }
+            else // position contains a tower
+            {
+                cellColoring.GetComponent<Renderer>().material.color = ConfigurationElements.playersColor[TowerOfPlayer];
+            }
         }
 
         /// <summary>
@@ -56,6 +83,12 @@ class GridPositionElements
         }
     }
 
+    public static void updateColors ()
+    {
+        foreach (var positionControl in PositionControls.Values)
+            positionControl.UpdateColor();
+    }
+
     public static int[] GetNumberOfControlledPositionsPerPlayer()
     {
         int[] playerControl = new int[Player.Count];
@@ -72,27 +105,35 @@ class GridPositionElements
 
     public static void IncreasePositionControl(Vector3 position, int player)
     {
-        foreach (var neighbor in ControlledPositionsAround(position, ConfigurationElements.ControlDistance))
-            neighbor.IncreaseControl(player);
-        // Also add a PositionControl for the now occupied position, if missing.
+        // add a PositionControl for the now occupied position, if missing.
         PositionControl control;
         var hexPosition = new HexPosition(position);
         if (!PositionControls.TryGetValue(hexPosition, out control))
-            PositionControls.Add(hexPosition, control = new PositionControl());
+            PositionControls.Add(hexPosition, control = new PositionControl(position));
         control.TowerOfPlayer = player;
+
+        // recalculate position controls
+        foreach (var neighbor in ControlledPositionsAround(position, ConfigurationElements.ControlDistance))
+        {
+            neighbor.IncreaseControl(player);
+        }
     }
 
     public static void DecreasePositionControl(Vector3 position, int player)
     {
-        foreach (var neighbor in ControlledPositionsAround(position, ConfigurationElements.ControlDistance))
-            neighbor.DecreaseControl(player);
         // Remove the mark of the current player from the position.
         PositionControl control;
         var hexPosition = new HexPosition(position);
         if (PositionControls.TryGetValue(hexPosition, out control))
             control.TowerOfPlayer = Player.NoPlayer;
+
+        // recalculate position controls
+        foreach (var neighbor in ControlledPositionsAround(position, ConfigurationElements.ControlDistance))
+        {
+            neighbor.DecreaseControl(player);
+        }
     }
-    
+
     /// <summary>
     /// Gets infos about who controls the positions around a given position.
     /// </summary>
@@ -103,7 +144,7 @@ class GridPositionElements
             PositionControl control;
             if (!PositionControls.TryGetValue(neighbor, out control))
             {
-                control = new PositionControl();
+                control = new PositionControl(neighbor.getPosition());
                 PositionControls.Add(neighbor, control);
             }
             yield return control;
