@@ -13,9 +13,5 @@ class ConfigurationElements
     public static int towers_ControlDistance = 3;
 
     public static readonly Color[] PlayerColors = { Color.red, Color.blue, Color.cyan, Color.green };
-
-    public static Color[] playersColor = {
-        Color.Lerp(Color.white, Color.red, 0.5f),
-        Color.Lerp(Color.white, Color.blue, 0.5f),
-    } ;
+    
 }
