@@ -49,13 +49,13 @@ class GridPositionElements
                 else
                 {
                     cellColoring.SetActive(true);
-                    cellColoring.GetComponent<Renderer>().material.color = ConfigurationElements.PlayersLerpedColors[GetPlayerInControl()];
+                    cellColoring.GetComponent<Renderer>().material.color = ConfigurationElements.players_lerpedColor[GetPlayerInControl()];
                 }
             }
             else // position contains a tower
             {
                 cellColoring.SetActive(true);
-                cellColoring.GetComponent<Renderer>().material.color = ConfigurationElements.PlayersLerpedColors[TowerOfPlayer];
+                cellColoring.GetComponent<Renderer>().material.color = ConfigurationElements.players_lerpedColor[TowerOfPlayer];
             }
         }
 
