@@ -23,7 +23,7 @@ class GridPositionElements
 
         public PositionControl (Vector3 position)
         {
-            cellColoring = (GameObject) GameObject.Instantiate(sampleCellColored, new Vector3(position.x, 0.001f , position.z), sampleCellColored.transform.rotation);
+            cellColoring = (GameObject) GameObject.Instantiate(sampleCellColored, new Vector3(position.x, 0.01f , position.z), sampleCellColored.transform.rotation);
         }
 
         public void IncreaseControl(int player)
@@ -49,13 +49,13 @@ class GridPositionElements
                 else
                 {
                     cellColoring.SetActive(true);
-                    cellColoring.GetComponent<Renderer>().material.color = ConfigurationElements.playersColor[GetPlayerInControl()];
+                    cellColoring.GetComponent<Renderer>().material.color = Player.GetTileColor(GetPlayerInControl());
                 }
             }
             else // position contains a tower
             {
                 cellColoring.SetActive(true);
-                cellColoring.GetComponent<Renderer>().material.color = ConfigurationElements.playersColor[TowerOfPlayer];
+                cellColoring.GetComponent<Renderer>().material.color = Player.GetTileColor(TowerOfPlayer);
             }
         }
 
