@@ -27,7 +27,7 @@ public class GridTowers {
         // check if tower does not already exists, before creating new tower
         if (getTower(position) == null)
         {
-            Debug.Log("New Tower instance; position=" + position);
+            // Debug.Log("New Tower instance; position=" + position);
             GameObject newTower = (GameObject)GameObject.Instantiate(towerSample, position, towerSample.transform.rotation);
             newTower.SetActive(true);
 
@@ -41,6 +41,8 @@ public class GridTowers {
 
             // put color on tile
             (new HexPosition(position)).select("Player" + playerNumber);
+
+            // put color on tile 0,0,0
         }
     }
 

@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\ConfigurationElements.cs" />
     <Compile Include="Assets\Scripts\Grid.cs" />
     <Compile Include="Assets\Scripts\GridPositionElements.cs" />
+    <Compile Include="Assets\Scripts\HexInfo\HexInfo.cs" />
     <Compile Include="Assets\Scripts\KeyboardCameraControl.cs" />
     <Compile Include="Assets\Scripts\Messages\IUpdateUi.cs" />
     <Compile Include="Assets\Scripts\MouseCameraControl.cs" />
