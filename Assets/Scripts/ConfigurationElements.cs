@@ -9,4 +9,5 @@ class ConfigurationElements
     public static int board_size_z = 29;
 
     public static int towers_reachDistance = 1;
+    public static int ControlDistance = 1;
 }

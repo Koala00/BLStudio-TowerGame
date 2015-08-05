@@ -73,7 +73,7 @@ public class GridTowers {
             {   // count towers in reach = not same position and not same player number ; and distance < x)
                 if (! ((sourceTower.coordinates.Equals(targetTower.coordinates)) || (sourceTower.playerNumber.Equals(targetTower.playerNumber))))
                 {
-                    if (GridPositionElements.calculateDistance(sourceTower.coordinates, targetTower.coordinates) <= ConfigurationElements.towers_reachDistance)
+                    if (calculateDistance(sourceTower.coordinates, targetTower.coordinates) <= ConfigurationElements.towers_reachDistance)
                         towersInReach.Add(targetTower);
                 }
             }
@@ -105,5 +105,12 @@ public class GridTowers {
             towersList.Remove(tower);
             GridPositionElements.DecreasePositionControl(tower.coordinates, tower.playerNumber);
         }
+    }
+
+    public static int calculateDistance(Vector3 position1, Vector3 position2)
+    {
+        var hexPos1 = new HexPosition(position1);
+        var hexPos2 = new HexPosition(position2);
+        return hexPos1.dist(hexPos2);
     }
 }

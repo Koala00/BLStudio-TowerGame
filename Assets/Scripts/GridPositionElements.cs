@@ -7,9 +7,6 @@ using UnityEngine.Assertions;
 
 class GridPositionElements
 {
-    public const int ControlDistance = 1;
-
-    public enum actions { create, delete };
     private static Dictionary<HexPosition, PositionControl> PositionControls = new Dictionary<HexPosition, PositionControl>();
 
     /// <summary>
@@ -19,6 +16,7 @@ class GridPositionElements
     public class PositionControl
     {
         private int[] ControlOfPlayer = new int[Player.Count];
+        public int TowerOfPlayer = Player.NoPlayer; // If occupied by a tower of a player, this contains the player number.
 
         public void IncreaseControl(int player)
         {
@@ -64,7 +62,9 @@ class GridPositionElements
         foreach(var positionControl in PositionControls.Values)
         {
             int player = positionControl.GetPlayerInControl();
-            if (player != Player.NoPlayer)
+            bool onePlayerHasControl = player != Player.NoPlayer;
+            bool positionIsEmpty = positionControl.TowerOfPlayer == Player.NoPlayer;
+            if (onePlayerHasControl && positionIsEmpty)
                 playerControl[player]++;
         }
         return playerControl;
@@ -72,33 +72,27 @@ class GridPositionElements
 
     public static void IncreasePositionControl(Vector3 position, int player)
     {
-        UpdatePositionControl(position, player, actions.create);
+        foreach (var neighbor in ControlledPositionsAround(position, ConfigurationElements.ControlDistance))
+            neighbor.IncreaseControl(player);
+        // Also add a PositionControl for the now occupied position, if missing.
+        PositionControl control;
+        var hexPosition = new HexPosition(position);
+        if (!PositionControls.TryGetValue(hexPosition, out control))
+            PositionControls.Add(hexPosition, control = new PositionControl());
+        control.TowerOfPlayer = player;
     }
 
     public static void DecreasePositionControl(Vector3 position, int player)
     {
-        UpdatePositionControl(position, player, actions.delete);
+        foreach (var neighbor in ControlledPositionsAround(position, ConfigurationElements.ControlDistance))
+            neighbor.DecreaseControl(player);
+        // Remove the mark of the current player from the position.
+        PositionControl control;
+        var hexPosition = new HexPosition(position);
+        if (PositionControls.TryGetValue(hexPosition, out control))
+            control.TowerOfPlayer = Player.NoPlayer;
     }
-
-    private static void UpdatePositionControl(Vector3 position, int player, actions updateAction)
-    {
-        foreach (var neighbor in ControlledPositionsAround(position, ControlDistance))
-        {
-            if (updateAction == actions.create)
-                neighbor.IncreaseControl(player);
-            else
-                neighbor.DecreaseControl(player);
-        }
-        // TODO: put color on elements, for player with majority.
-    }
-
-    public static int calculateDistance(Vector3 position1, Vector3 position2)
-    {
-        var hexPos1 = new HexPosition(position1);
-        var hexPos2 = new HexPosition(position2);
-        return hexPos1.dist(hexPos2);
-    }
-
+    
     /// <summary>
     /// Gets infos about who controls the positions around a given position.
     /// </summary>
