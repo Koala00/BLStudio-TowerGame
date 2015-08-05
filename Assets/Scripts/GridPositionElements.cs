@@ -54,6 +54,7 @@ class GridPositionElements
             }
             else // position contains a tower
             {
+                cellColoring.SetActive(true);
                 cellColoring.GetComponent<Renderer>().material.color = ConfigurationElements.playersColor[TowerOfPlayer];
             }
         }
