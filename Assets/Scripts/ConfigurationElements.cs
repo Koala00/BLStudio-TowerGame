@@ -13,5 +13,13 @@ class ConfigurationElements
     public static int towers_ControlDistance = 3;
 
     public static readonly Color[] PlayerColors = { Color.red, Color.blue, Color.cyan, Color.green };
-    
+
+    public static Color[] PlayersLerpedColors; // Will be initialized later based on PlayerColors.
+
+    static ConfigurationElements()
+    {
+        PlayersLerpedColors = new Color[PlayerColors.Length];
+        for (int player = 0; player < PlayerColors.Length; player++)
+            PlayersLerpedColors[player] = Color.Lerp(Color.white, PlayerColors[player], 0.5f);
+    }
 }

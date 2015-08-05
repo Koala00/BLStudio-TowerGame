@@ -41,7 +41,7 @@ class UI : MonoBehaviour, IUpdateUi
                 label.transform.Translate(new Vector3(0, -scoreTemplateRect.height * player));
             }
             var labelText = label.GetComponent<Text>();
-            labelText.color = Player.GetColor(player);
+            labelText.color = ConfigurationElements.PlayerColors[player];
             PlayerScoreTexts[player] = labelText;
             SetPlayerScore(player, 0);
         }
@@ -67,7 +67,7 @@ class UI : MonoBehaviour, IUpdateUi
     {
         var label = PlayerNameLabel.GetComponent<Text>();
         label.text = "Player " + (Player.Current + 1);
-        label.color = Player.GetColor(Player.Current);
+        label.color = ConfigurationElements.PlayerColors[Player.Current];
     }
 
     public void SetScores(int[] scores)
