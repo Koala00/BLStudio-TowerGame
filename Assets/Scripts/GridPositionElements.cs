@@ -114,7 +114,7 @@ class GridPositionElements
         control.TowerOfPlayer = player;
 
         // recalculate position controls
-        foreach (var neighbor in ControlledPositionsAround(position, ConfigurationElements.ControlDistance))
+        foreach (var neighbor in ControlledPositionsAround(position, ConfigurationElements.towers_ControlDistance))
         {
             neighbor.IncreaseControl(player);
         }
@@ -129,7 +129,7 @@ class GridPositionElements
             control.TowerOfPlayer = Player.NoPlayer;
 
         // recalculate position controls
-        foreach (var neighbor in ControlledPositionsAround(position, ConfigurationElements.ControlDistance))
+        foreach (var neighbor in ControlledPositionsAround(position, ConfigurationElements.towers_ControlDistance))
         {
             neighbor.DecreaseControl(player);
         }
