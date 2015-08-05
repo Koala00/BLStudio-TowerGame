@@ -89,12 +89,12 @@ public class Grid : MonoBehaviour
     {
         GridTowers.endTurn();
         Player.NextPlayer();
+        GridPositionElements.updateColors();
         UpdateUi();
     }
 
     private void UpdateUi()
     {
-        GridPositionElements.updateColors();
         ExecuteEvents.Execute<IUpdateUi>(canvas, null, (msg, data) => msg.SetCurrentPlayer());
         int[] scores = GridPositionElements.GetNumberOfControlledPositionsPerPlayer();
         ExecuteEvents.Execute<IUpdateUi>(canvas, null, (msg, data) => msg.SetScores(scores));
