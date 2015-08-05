@@ -26,6 +26,8 @@ class UI : MonoBehaviour, IUpdateUi
 
     private void InitScorePanel()
     {
+        if (PlayerScoreTexts != null)
+            return;
         PlayerScoreTexts = new Text[Player.Count];
         var scoreTemplate = ScorePanel.transform.GetChild(0).gameObject;
         var scoreTemplateRect = scoreTemplate.GetComponent<RectTransform>().rect;
@@ -70,7 +72,8 @@ class UI : MonoBehaviour, IUpdateUi
 
     public void SetScores(int[] scores)
     {
-        for(int player = 0; player < scores.Length; player++)
+        InitScorePanel();
+        for (int player = 0; player < scores.Length; player++)
         {
             SetPlayerScore(player, scores[player]);
         }
