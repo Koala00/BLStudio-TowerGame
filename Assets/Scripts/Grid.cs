@@ -92,4 +92,18 @@ public class Grid : MonoBehaviour
         int[] scores = GridPositionElements.GetNumberOfControlledPositionsPerPlayer();
         ExecuteEvents.Execute<IUpdateUi>(canvas, null, (msg, data) => msg.SetScores(scores));
     }
+
+    public static bool checkElementInsideGrid (Vector3 position)
+    {
+        if ((position.x >= ConfigurationElements.board_size_x) || (position.z >= ConfigurationElements.board_size_z))
+            return false;
+        if ((position.x <= -ConfigurationElements.board_size_x) || (position.z >= ConfigurationElements.board_size_z))
+            return false;
+        if ((position.x >= ConfigurationElements.board_size_x) || (position.z <= -ConfigurationElements.board_size_z))
+            return false;
+        if ((position.x <= -ConfigurationElements.board_size_x) || (position.z <= -ConfigurationElements.board_size_z))
+            return false;
+
+        return true;
+    }
 }

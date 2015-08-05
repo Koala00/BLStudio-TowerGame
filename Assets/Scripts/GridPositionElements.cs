@@ -119,7 +119,7 @@ class GridPositionElements
     private static IEnumerable<HexPosition> NeighborhoodRespectingBorders(Vector3 position, int distance)
     {
         foreach (HexPosition neighbor in Neighborhood(position, distance))
-            if (IsPositionOnBoard(neighbor))
+            if (Grid.checkElementInsideGrid(neighbor.getPosition()))
                 yield return neighbor;
     }
 
@@ -153,10 +153,4 @@ class GridPositionElements
                 yield return current = current.NW;
         }
     }
-
-    private static bool IsPositionOnBoard(HexPosition position)
-    {
-        return true; // TODO: implement real logic
-    }
-    
 }

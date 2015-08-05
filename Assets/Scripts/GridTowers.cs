@@ -21,13 +21,7 @@ public class GridTowers {
     public static bool createTower (GameObject towerSample, Vector3 position, int playerNumber)
     {
         // check borders
-        if ((position.x >= ConfigurationElements.board_size_x) || (position.z >= ConfigurationElements.board_size_z))
-            return false;
-        if ((position.x <= -ConfigurationElements.board_size_x) || (position.z >= ConfigurationElements.board_size_z))
-            return false;
-        if ((position.x >= ConfigurationElements.board_size_x) || (position.z <= -ConfigurationElements.board_size_z))
-            return false;
-        if ((position.x <= -ConfigurationElements.board_size_x) || (position.z <= -ConfigurationElements.board_size_z))
+        if (!Grid.checkElementInsideGrid(position))
             return false;
 
         // check if tower does not already exists, before creating new tower
