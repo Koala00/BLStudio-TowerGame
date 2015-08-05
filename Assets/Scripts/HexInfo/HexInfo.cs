@@ -6,10 +6,11 @@ using UnityEngine;
 
 public class HexInfo : MonoBehaviour
 {
-/*    //basic hexagon mesh making
+    //basic hexagon mesh making
     public Vector3[] Vertices;
     public Vector2[] uv;
     public int[] Triangles;
+    public Texture texture;
 
     void Start()
     {
@@ -22,14 +23,13 @@ public class HexInfo : MonoBehaviour
         float floorLevel = 0;
         Vertices = new Vector3[]
         {
-            new Vector3(-1f , floorLevel, -.5f),
-            new Vector3(-1f, floorLevel, .5f),
-            new Vector3(0f, floorLevel, 1f),
-            new Vector3(1f, floorLevel, .5f),
-            new Vector3(1f, floorLevel, -.5f),
-            new Vector3(0f, floorLevel, -1f)
+            new Vector3(-.5f , floorLevel, -1f),
+            new Vector3(-1f, floorLevel, 0f),
+            new Vector3(-.5f, floorLevel, 1f),
+            new Vector3(.5f, floorLevel, 1f),
+            new Vector3(1f, floorLevel, 0f),
+            new Vector3(.5f, floorLevel, -1f)
         };
-
         #endregion
 
         #region triangles
@@ -40,20 +40,18 @@ public class HexInfo : MonoBehaviour
             1,2,4,
             2,3,4
         };
-
         #endregion
 
         #region uv
         uv = new Vector2[]
         {
-            new Vector2(0,0.25f),
-            new Vector2(0,0.75f),
-            new Vector2(0.5f,1),
-            new Vector2(1,0.75f),
-            new Vector2(1,0.25f),
-            new Vector2(0.5f,0),
+            new Vector2(0.25f,0),
+            new Vector2(0,0.5f),
+            new Vector2(0.25f,1),
+            new Vector2(0.75f,1),
+            new Vector2(1,0.5f),
+            new Vector2(0.75f,0),
         };
-
         #endregion
 
         #region finalize
@@ -79,9 +77,8 @@ public class HexInfo : MonoBehaviour
         meshFilter.mesh = mesh;
 
         //UV TESTING
-        Renderer<Material>.mainTexture = texture;
-
+        gameObject.GetComponent<Renderer>().material.mainTexture = texture;
         #endregion
 
-    } */
+    }
 }
