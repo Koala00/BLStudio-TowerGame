@@ -369,7 +369,7 @@ Transform:
   m_LocalScale: {x: 1, y: 2.51875019, z: 2.51874995}
   m_Children: []
   m_Father: {fileID: 641758194}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!114 &215382275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -849,7 +849,7 @@ Transform:
   - {fileID: 531561690}
   - {fileID: 1408629074}
   m_Father: {fileID: 641758194}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!1 &641758193
 GameObject:
   m_ObjectHideFlags: 0
@@ -876,6 +876,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1466097664}
+  - {fileID: 1630627308}
   - {fileID: 215382274}
   - {fileID: 646740360}
   - {fileID: 1282387578}
@@ -970,7 +971,7 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 641758194}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!119 &646740361
 Projector:
   m_ObjectHideFlags: 0
@@ -1399,7 +1400,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 641758194}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!1 &1396298316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1803,6 +1804,49 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1542567505}
+--- !u!1 &1630627307
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1630627308}
+  - 114: {fileID: 1630627309}
+  m_Layer: 0
+  m_Name: HexagonFull
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1630627308
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1630627307}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: .00100000005, z: 0}
+  m_LocalScale: {x: .959999979, y: .899999976, z: .834999979}
+  m_Children: []
+  m_Father: {fileID: 641758194}
+  m_RootOrder: 1
+--- !u!114 &1630627309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1630627307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01dcbe78258f4e948839761f93ca49f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Vertices: []
+  uv: []
+  Triangles: 
+  texture: {fileID: 2800000, guid: bd062285e1b82ba47a6d1aa74b587b5f, type: 3}
 --- !u!1001 &1651477474
 Prefab:
   m_ObjectHideFlags: 0
