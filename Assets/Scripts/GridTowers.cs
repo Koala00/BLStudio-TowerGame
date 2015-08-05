@@ -18,11 +18,17 @@ public class GridTowers {
     }
 
     // create a new tower at selected position
-    public static void createTower (GameObject towerSample, Vector3 position, int playerNumber)
+    public static bool createTower (GameObject towerSample, Vector3 position, int playerNumber)
     {
         // check borders
         if ((position.x >= ConfigurationElements.board_size_x) || (position.z >= ConfigurationElements.board_size_z))
-            return;
+            return false;
+        if ((position.x <= -ConfigurationElements.board_size_x) || (position.z >= ConfigurationElements.board_size_z))
+            return false;
+        if ((position.x >= ConfigurationElements.board_size_x) || (position.z <= -ConfigurationElements.board_size_z))
+            return false;
+        if ((position.x <= -ConfigurationElements.board_size_x) || (position.z <= -ConfigurationElements.board_size_z))
+            return false;
 
         // check if tower does not already exists, before creating new tower
         if (getTower(position) == null)
@@ -42,8 +48,12 @@ public class GridTowers {
             // put color on tile
             (new HexPosition(position)).select("Player" + playerNumber);
 
-            // put color on tile 0,0,0
+        } else
+        {
+            return false;
         }
+
+        return true;
     }
 
     public static TowerElement getTower (Vector3 position)
