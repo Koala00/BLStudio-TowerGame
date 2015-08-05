@@ -1,17 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
+using System;
 
 public class Grid : MonoBehaviour
 {
-    public int NUM_PLAYERS = 2;
-
     public GameObject marker;
     public GameObject towerSample;
-    public GameObject PlayerNameLabel;
-    private int CurrentPlayer = 0;
-
-    private Color[] PlayerColors = { Color.magenta, Color.cyan, Color.red, Color.green };
+    public GameObject canvas;
 
     private HexPosition mouse = null;
 
@@ -21,10 +18,10 @@ public class Grid : MonoBehaviour
         HexPosition.setColor("Cursor", Color.blue, 1);
         HexPosition.setColor("Selectable", Color.green, 2);
         HexPosition.setColor("Selection", Color.yellow, 3);
-        for (int i = 0; i < NUM_PLAYERS; i++)
-          HexPosition.setColor("Player" + i , GetPlayerColor(i), 4 + i);
+        for (int i = 0; i < Player.Count; i++)
+          HexPosition.setColor("Player" + i , Player.GetColor(i), 4 + i);
         HexPosition.Marker = marker;
-        UpdatePlayerLabel();
+        UpdateUi();
         towerSample.SetActive(false);
     }
 
@@ -68,8 +65,8 @@ public class Grid : MonoBehaviour
                 // add a new tower
                 if (Input.GetMouseButtonDown(0))
                 {
-                    GridTowers.createTower(towerSample, mouse.getPosition(), CurrentPlayer);
-                    mouse.select("Player" + CurrentPlayer);
+                    GridTowers.createTower(towerSample, mouse.getPosition(), Player.Current);
+                    mouse.select("Player" + Player.Current);
                     endTurn();
                 }
             }
@@ -85,20 +82,15 @@ public class Grid : MonoBehaviour
     // endTurn
     public void endTurn ()
     {
-        CurrentPlayer = (CurrentPlayer + 1) % NUM_PLAYERS;
-        UpdatePlayerLabel();
         GridTowers.endTurn();
+        Player.NextPlayer();
+        UpdateUi();
     }
 
-    private void UpdatePlayerLabel()
+    private void UpdateUi()
     {
-        var label = PlayerNameLabel.GetComponent<UnityEngine.UI.Text>();
-        label.text = "Player " + (CurrentPlayer + 1);
-        label.color = GetPlayerColor(CurrentPlayer);
-    }
-
-    private Color GetPlayerColor(int player)
-    {
-        return PlayerColors[player % PlayerColors.Length];
+        ExecuteEvents.Execute<IUpdateUi>(canvas, null, (msg, data) => msg.SetCurrentPlayer());
+        int[] scores = GridPositionElements.GetNumberOfControlledPositionsPerPlayer();
+        ExecuteEvents.Execute<IUpdateUi>(canvas, null, (msg, data) => msg.SetScores(scores));
     }
 }

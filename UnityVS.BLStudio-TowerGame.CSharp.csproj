@@ -73,8 +73,11 @@
     <Compile Include="Assets\Scripts\Grid.cs" />
     <Compile Include="Assets\Scripts\GridPositionElements.cs" />
     <Compile Include="Assets\Scripts\KeyboardCameraControl.cs" />
+    <Compile Include="Assets\Scripts\Messages\IUpdateUi.cs" />
     <Compile Include="Assets\Scripts\MouseCameraControl.cs" />
     <Compile Include="Assets\Scripts\GridTowers.cs" />
+    <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\UI.cs" />
     <Compile Include="Assets\_Imports\Scripts\AI.cs" />
     <Compile Include="Assets\_Imports\Scripts\AStar.cs" />
     <Compile Include="Assets\_Imports\Scripts\HexEntry.cs" />
@@ -83,12 +86,12 @@
     <Compile Include="Assets\_Imports\Scripts\HexPosition.cs" />
     <Compile Include="Assets\_Imports\Scripts\Human.cs" />
     <Compile Include="Assets\_Imports\Scripts\NegativeBinomialDistribution.cs" />
-    <Compile Include="Assets\_Imports\Scripts\Player.cs" />
     <Compile Include="Assets\_Imports\Scripts\Unit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\_Imports\WatchTower\ReadMe.txt" />
     <None Include="Assets\_Imports\readme.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

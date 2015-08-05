@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class GridTowers {
 
-    public static int reachDistance = 1;
+    public const int reachDistance = 1;
 
     private static List<TowerElement> towersList = new List<TowerElement>();
 
@@ -35,6 +35,7 @@ public class GridTowers {
             tower.playerNumber = playerNumber;
 
             towersList.Add(tower);
+            GridPositionElements.IncreasePositionControl(position, playerNumber);
         }
     }
 
@@ -91,6 +92,7 @@ public class GridTowers {
             HexPosition position = new HexPosition(tower.coordinates);
             position.unselect("Player" + tower.playerNumber);
             towersList.Remove(tower);
+            GridPositionElements.DecreasePositionControl(tower.coordinates, tower.playerNumber);
         }
     }
 }
