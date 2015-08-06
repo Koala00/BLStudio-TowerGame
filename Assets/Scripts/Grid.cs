@@ -8,7 +8,6 @@ public class Grid : MonoBehaviour
 {
     public GameObject sampleCellEmptyMarker;
     public GameObject sampleCellFullMarker;
-    public GameObject sampleTower;
     public GameObject canvas;
 
     private HexPosition mouse = null;
@@ -28,7 +27,6 @@ public class Grid : MonoBehaviour
 
         HexPosition.Marker = sampleCellEmptyMarker;
         UpdateUi();
-        sampleTower.SetActive(false);
     }
 
     // Update is called once per frame
@@ -73,7 +71,8 @@ public class Grid : MonoBehaviour
                 // add a new tower
                 if (Input.GetMouseButtonDown(0))
                 {
-                    if (GridTowers.createTower(sampleTower, mouse.getPosition(), Player.Current))
+                    var gridTowers = GetComponent<GridTowers>();
+                    if (gridTowers.createTower(mouse.getPosition(), Player.Current))
                         endTurn();
                 }
             }
@@ -89,7 +88,8 @@ public class Grid : MonoBehaviour
     // endTurn
     public void endTurn ()
     {
-        GridTowers.endTurn();
+        var gridTowers = GetComponent<GridTowers>();
+        gridTowers.endTurn();
         Player.NextPlayer();
         GridPositionElements.updateColors();
         UpdateUi();

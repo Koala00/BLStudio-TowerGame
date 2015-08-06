@@ -71,7 +71,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\ConfigurationElements.cs" />
-    <Compile Include="Assets\Scripts\ExplodeWhenHit.cs" />
     <Compile Include="Assets\Scripts\GameEnd\GameEnd.cs" />
     <Compile Include="Assets\Scripts\GameEnd\GameEndAfterNTurns.cs" />
     <Compile Include="Assets\Scripts\GameEnd\GameEndPercentageControlled.cs" />
@@ -80,12 +79,12 @@
     <Compile Include="Assets\Scripts\GridPositionElements.cs" />
     <Compile Include="Assets\Scripts\GridCellFiller.cs" />
     <Compile Include="Assets\Scripts\KeyboardCameraControl.cs" />
-    <Compile Include="Assets\Scripts\Messages\ICanBeHit.cs" />
     <Compile Include="Assets\Scripts\Messages\IHandleEndTurn.cs" />
     <Compile Include="Assets\Scripts\Messages\IUpdateUi.cs" />
     <Compile Include="Assets\Scripts\MouseCameraControl.cs" />
     <Compile Include="Assets\Scripts\GridTowers.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\TowerControl.cs" />
     <Compile Include="Assets\Scripts\UI.cs" />
     <Compile Include="Assets\_Imports\Scripts\AI.cs" />
     <Compile Include="Assets\_Imports\Scripts\AStar.cs" />
