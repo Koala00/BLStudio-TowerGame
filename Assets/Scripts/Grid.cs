@@ -93,6 +93,7 @@ public class Grid : MonoBehaviour
         Player.NextPlayer();
         GridPositionElements.updateColors();
         UpdateUi();
+        ExecuteEvents.Execute<IHandleEndTurn>(canvas, null, (msg, data) => msg.EndTurn());
     }
 
     private void UpdateUi()
@@ -100,7 +101,6 @@ public class Grid : MonoBehaviour
         ExecuteEvents.Execute<IUpdateUi>(canvas, null, (msg, data) => msg.SetCurrentPlayer());
         int[] scores = GridPositionElements.GetNumberOfControlledPositionsPerPlayer();
         ExecuteEvents.Execute<IUpdateUi>(canvas, null, (msg, data) => msg.SetScores(scores));
-        ExecuteEvents.Execute<IHandleEndTurn>(canvas, null, (msg, data) => msg.EndTurn());
     }
 
     public static bool checkElementInsideGrid (Vector3 position)
