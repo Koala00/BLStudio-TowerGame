@@ -1378,7 +1378,6 @@ GameObject:
   - 65: {fileID: 916699936}
   - 23: {fileID: 916699935}
   - 114: {fileID: 916699938}
-  - 114: {fileID: 916699939}
   m_Layer: 0
   m_Name: Watchtower
   m_TagString: Untagged
@@ -1463,17 +1462,6 @@ MonoBehaviour:
   VARIATION: 1
   SPEED: 1
   RANGE: 1
---- !u!114 &916699939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 916699933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecd4c1984f7ffb34b97ba2cf9d43e3e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &950017349
 GameObject:
   m_ObjectHideFlags: 0
