@@ -55,15 +55,10 @@ public class GridCellFiller : MonoBehaviour
 
         #region finalize
         //add a mesh filter to the GO the script is attached to; cache it for later
-        MeshFilter meshFilter;
-        if (gameObject.GetComponent<MeshFilter>() == null)
-        {
+        MeshFilter meshFilter = gameObject.GetComponent<MeshFilter>();
+        if (meshFilter == null)
             meshFilter = gameObject.AddComponent<MeshFilter>();
-        } else
-        {
-            meshFilter = gameObject.GetComponent<MeshFilter>();
-        }
-
+        
         //add a mesh renderer to the GO the script is attached to
         if (gameObject.GetComponent<MeshRenderer>() == null)
         {

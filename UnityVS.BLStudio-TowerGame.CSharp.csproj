@@ -71,10 +71,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\ConfigurationElements.cs" />
+    <Compile Include="Assets\Scripts\GameEnd\GameEnd.cs" />
+    <Compile Include="Assets\Scripts\GameEnd\GameEndAfterNTurns.cs" />
+    <Compile Include="Assets\Scripts\GameEnd\GameEndPercentageControlled.cs" />
+    <Compile Include="Assets\Scripts\GameEnd\ICheckGameEnd.cs" />
     <Compile Include="Assets\Scripts\Grid.cs" />
     <Compile Include="Assets\Scripts\GridPositionElements.cs" />
     <Compile Include="Assets\Scripts\GridCellFiller.cs" />
     <Compile Include="Assets\Scripts\KeyboardCameraControl.cs" />
+    <Compile Include="Assets\Scripts\Messages\IHandleEndTurn.cs" />
     <Compile Include="Assets\Scripts\Messages\IUpdateUi.cs" />
     <Compile Include="Assets\Scripts\MouseCameraControl.cs" />
     <Compile Include="Assets\Scripts\GridTowers.cs" />

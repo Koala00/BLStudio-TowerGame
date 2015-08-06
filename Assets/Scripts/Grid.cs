@@ -34,6 +34,8 @@ public class Grid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameEnd.GameEnded)
+            return;
         bool isMouseInsideBoard = false;
 
         // Test mouse position + highlight pointed element with marker
@@ -98,6 +100,7 @@ public class Grid : MonoBehaviour
         ExecuteEvents.Execute<IUpdateUi>(canvas, null, (msg, data) => msg.SetCurrentPlayer());
         int[] scores = GridPositionElements.GetNumberOfControlledPositionsPerPlayer();
         ExecuteEvents.Execute<IUpdateUi>(canvas, null, (msg, data) => msg.SetScores(scores));
+        ExecuteEvents.Execute<IHandleEndTurn>(canvas, null, (msg, data) => msg.EndTurn());
     }
 
     public static bool checkElementInsideGrid (Vector3 position)
