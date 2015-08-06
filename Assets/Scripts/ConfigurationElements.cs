@@ -12,12 +12,13 @@ class ConfigurationElements
 
     public static int towers_reachDistance = 3;
     public static int towers_ControlDistance = 3;
+    internal static int tower_Life = 10;
 
     public static readonly Color[] players_color = { Color.red, Color.blue, Color.cyan, Color.green };
     public static Color[] players_lerpedColor; // Will be initialized later based on PlayerColors.
 
 
-    
+
     // initialisation section
     static ConfigurationElements()
     {

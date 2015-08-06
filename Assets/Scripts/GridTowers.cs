@@ -14,7 +14,7 @@ public class GridTowers {
         public GameObject towerObject;
         public Vector3 coordinates;
         public int playerNumber;
-        public int life = 10;
+        public int life = ConfigurationElements.tower_Life;
     }
 
     // create a new tower at selected position
@@ -81,7 +81,10 @@ public class GridTowers {
             if (towersInReach.Count > 0)
             {
                 int selectedTower = Random.Range(0, towersInReach.Count - 1);
-                towersInReach[selectedTower].life -= 1;
+                var targetTower = towersInReach[selectedTower];
+                targetTower.life -= 1;
+                var shootingTurret = sourceTower.towerObject.GetComponent<Turret>();
+                shootingTurret.targetTransform = targetTower.towerObject.transform;
             }
         }
 
