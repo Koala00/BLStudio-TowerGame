@@ -21,4 +21,10 @@ static class Player
         Current = (Current + 1) % Count;
         Turns += 1;
     }
+
+    internal static void Reset()
+    {
+        Current = 0;
+        Turns = 0;
+    }
 }

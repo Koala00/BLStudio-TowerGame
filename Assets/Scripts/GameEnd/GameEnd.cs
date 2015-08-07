@@ -23,9 +23,10 @@ class GameEnd : MonoBehaviour, IHandleEndTurn
 
     private void ToggleVisibility(GameObject obj, bool visible)
     {
-        var renderers = obj.GetComponentsInChildren<CanvasRenderer>();
+        obj.SetActive(visible);
+        /*var renderers = obj.GetComponentsInChildren<CanvasRenderer>();
         foreach(var renderer in renderers)
-          renderer.SetAlpha(visible ? 100 : 0);
+          renderer.SetAlpha(visible ? 100 : 0);*/
     }
 
     public void EndTurn()
@@ -33,7 +34,6 @@ class GameEnd : MonoBehaviour, IHandleEndTurn
         bool gameOver = GameOverChecker.IsGameEnd();
         if (gameOver)
         {
-            var renderer = this.GetComponent<CanvasRenderer>();
             ToggleVisibility(GameOverPanel, true);
             GameEnded = true;
         }

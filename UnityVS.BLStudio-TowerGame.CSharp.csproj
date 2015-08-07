@@ -80,11 +80,17 @@
     <Compile Include="Assets\Scripts\GridPositionElements.cs" />
     <Compile Include="Assets\Scripts\GridTowers.cs" />
     <Compile Include="Assets\Scripts\KeyboardCameraControl.cs" />
+    <Compile Include="Assets\Scripts\Menu\IOptionsGroup.cs" />
+    <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\Menu\OptionsMenu.cs" />
+    <Compile Include="Assets\Scripts\Menu\UIGameEnd.cs" />
     <Compile Include="Assets\Scripts\Messages\IHandleEndTurn.cs" />
     <Compile Include="Assets\Scripts\Messages\IHandleMissleLaunched.cs" />
     <Compile Include="Assets\Scripts\Messages\IUpdateUi.cs" />
     <Compile Include="Assets\Scripts\MouseCameraControl.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\Settings\GameRuleSettings.cs" />
+    <Compile Include="Assets\Scripts\Settings\GlobalSettings.cs" />
     <Compile Include="Assets\Scripts\TowerControl.cs" />
     <Compile Include="Assets\Scripts\UI.cs" />
     <Compile Include="Assets\_Imports\Detonator Explosion Framework\Sample Supporting Emitters\DetonatorSprayHelper.cs" />
@@ -120,7 +126,6 @@
     <Compile Include="Assets\_Imports\Scripts\Behaviours\Ballistics\Turret.cs" />
     <Compile Include="Assets\_Imports\Scripts\Behaviours\CameraFlyControl.cs" />
     <Compile Include="Assets\_Imports\Scripts\Behaviours\DelayedDestroyOnTrigger.cs" />
-    <Compile Include="Assets\_Imports\Scripts\Behaviours\GlobalSettings.cs" />
     <Compile Include="Assets\_Imports\Scripts\Behaviours\GlobalSettingsGUI.cs" />
     <Compile Include="Assets\_Imports\Scripts\Behaviours\PitchMotorControl.cs" />
     <Compile Include="Assets\_Imports\Scripts\Behaviours\TargetMoveControl.cs" />

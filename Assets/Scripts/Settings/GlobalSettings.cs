@@ -8,6 +8,7 @@ using UnityEngine;
 public class GlobalSettings : MonoBehaviour
 {
     public BallisticsSettings ballisticsSettings;
+    public GameRuleSettings gameRuleSettings;
 
     public static GlobalSettings Instance
     {

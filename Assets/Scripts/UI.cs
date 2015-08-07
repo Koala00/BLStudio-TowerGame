@@ -59,6 +59,11 @@ class UI : MonoBehaviour, IUpdateUi
     void Update()
     {
         // UI updates are triggered by events, not here.
+        if (Input.GetButton("Cancel"))
+        {
+            // TODO: first save current state or ask user if he wants to quit.
+            Application.LoadLevel(0);
+        }
     }
 
     #region Implementation of IUpdateUi
@@ -80,4 +85,9 @@ class UI : MonoBehaviour, IUpdateUi
     }
 
     #endregion
+
+    public void GotoMainMenu()
+    {
+        Application.LoadLevel(0);
+    }
 }

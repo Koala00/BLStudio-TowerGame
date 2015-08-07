@@ -422,6 +422,13 @@ public class HexPosition : System.IEquatable<HexPosition> {
 		}
 		markers.Clear ();
 	}
+
+    public static void clearAll()
+    {
+        clearSelection();
+        dictionary.Clear();
+        selectionTypes.Clear();
+    }
 	
 	//This could be optimized.
 	/// <summary>

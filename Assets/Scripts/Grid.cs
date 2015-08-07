@@ -12,19 +12,18 @@ public class Grid : MonoBehaviour
 
     private HexPosition mouse = null;
 
+    void OnEnable()
+    {
+        HexPosition.clearAll();
+        GridPositionElements.Clear();
+        Player.Reset();
+    }
+
     // Use this for initialization
     void Start()
     {
         HexPosition.setColor("Cursor", Color.blue, 1);
-        GridPositionElements.sampleCellColored = sampleCellFullMarker;
-
-        /* - not wanted / color set inside instead of borders
-        HexPosition.setColor("Selectable", Color.green, 2);
-        HexPosition.setColor("Selection", Color.yellow, 3);
-        for (int i = 0; i < Player.Count; i++)
-          HexPosition.setColor("Player" + i , Player.GetColor(i), 4 + i);
-        */
-
+        GridPositionElements.sampleCellColored = sampleCellFullMarker;        
         HexPosition.Marker = sampleCellEmptyMarker;
         UpdateUi();
     }

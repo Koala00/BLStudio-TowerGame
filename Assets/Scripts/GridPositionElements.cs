@@ -11,6 +11,11 @@ class GridPositionElements
 
     private static Dictionary<HexPosition, PositionControl> PositionControls = new Dictionary<HexPosition, PositionControl>();
 
+    public static void Clear()
+    {
+        PositionControls.Clear();
+    }
+
     /// <summary>
     /// Keeps track of which player controls the position.
     /// When a tower is placed that affects the position, its control of the position is increased.
