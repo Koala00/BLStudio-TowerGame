@@ -37,6 +37,12 @@ class TowerControl: MonoBehaviour
         shootingTurret.targetTransform = targetTower.transform;
     }
 
+    public void SetColor(int player)
+    {
+        var renderer = transform.GetChild(0).GetComponent<MeshRenderer>();
+        renderer.material.color = ConfigurationElements.players_lerpedColor[player];
+    }
+
     // Tower got hit?
     void OnTriggerEnter(Collider other)
     {

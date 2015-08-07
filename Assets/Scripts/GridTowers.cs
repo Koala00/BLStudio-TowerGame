@@ -26,6 +26,7 @@ public class GridTowers : MonoBehaviour
         newTower.transform.SetParent(transform);
         var towerControl = newTower.GetComponent<TowerControl>();
         towerControl.playerNumber = playerNumber;
+        towerControl.SetColor(playerNumber);
 
         GridPositionElements.IncreasePositionControl(position, playerNumber);
 
