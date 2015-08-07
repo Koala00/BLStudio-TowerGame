@@ -76,16 +76,34 @@
     <Compile Include="Assets\Scripts\GameEnd\GameEndPercentageControlled.cs" />
     <Compile Include="Assets\Scripts\GameEnd\ICheckGameEnd.cs" />
     <Compile Include="Assets\Scripts\Grid.cs" />
-    <Compile Include="Assets\Scripts\GridPositionElements.cs" />
     <Compile Include="Assets\Scripts\GridCellFiller.cs" />
+    <Compile Include="Assets\Scripts\GridPositionElements.cs" />
+    <Compile Include="Assets\Scripts\GridTowers.cs" />
     <Compile Include="Assets\Scripts\KeyboardCameraControl.cs" />
     <Compile Include="Assets\Scripts\Messages\IHandleEndTurn.cs" />
+    <Compile Include="Assets\Scripts\Messages\IHandleMissleLaunched.cs" />
     <Compile Include="Assets\Scripts\Messages\IUpdateUi.cs" />
     <Compile Include="Assets\Scripts\MouseCameraControl.cs" />
-    <Compile Include="Assets\Scripts\GridTowers.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\TowerControl.cs" />
     <Compile Include="Assets\Scripts\UI.cs" />
+    <Compile Include="Assets\_Imports\Detonator Explosion Framework\Sample Supporting Emitters\DetonatorSprayHelper.cs" />
+    <Compile Include="Assets\_Imports\Detonator Explosion Framework\System\Detonator.cs" />
+    <Compile Include="Assets\_Imports\Detonator Explosion Framework\System\DetonatorBurstEmitter.cs" />
+    <Compile Include="Assets\_Imports\Detonator Explosion Framework\System\DetonatorCloudRing.cs" />
+    <Compile Include="Assets\_Imports\Detonator Explosion Framework\System\DetonatorComponent.cs" />
+    <Compile Include="Assets\_Imports\Detonator Explosion Framework\System\DetonatorFireball.cs" />
+    <Compile Include="Assets\_Imports\Detonator Explosion Framework\System\DetonatorForce.cs" />
+    <Compile Include="Assets\_Imports\Detonator Explosion Framework\System\DetonatorGlow.cs" />
+    <Compile Include="Assets\_Imports\Detonator Explosion Framework\System\DetonatorHeatwave.cs" />
+    <Compile Include="Assets\_Imports\Detonator Explosion Framework\System\DetonatorLight.cs" />
+    <Compile Include="Assets\_Imports\Detonator Explosion Framework\System\DetonatorShockwave.cs" />
+    <Compile Include="Assets\_Imports\Detonator Explosion Framework\System\DetonatorSmoke.cs" />
+    <Compile Include="Assets\_Imports\Detonator Explosion Framework\System\DetonatorSound.cs" />
+    <Compile Include="Assets\_Imports\Detonator Explosion Framework\System\DetonatorSparks.cs" />
+    <Compile Include="Assets\_Imports\Detonator Explosion Framework\System\DetonatorSpray.cs" />
+    <Compile Include="Assets\_Imports\Detonator Explosion Framework\TestScene\DetonatorTest.cs" />
+    <Compile Include="Assets\_Imports\Detonator Explosion Framework\TestScene\TouchToMouse.cs" />
     <Compile Include="Assets\_Imports\Scripts\AI.cs" />
     <Compile Include="Assets\_Imports\Scripts\AStar.cs" />
     <Compile Include="Assets\_Imports\Scripts\Behaviours\BackAndForthKinematics.cs" />
@@ -114,7 +132,6 @@
     <Compile Include="Assets\_Imports\Scripts\HexPosition.cs" />
     <Compile Include="Assets\_Imports\Scripts\Human.cs" />
     <Compile Include="Assets\_Imports\Scripts\NegativeBinomialDistribution.cs" />
-    <Compile Include="Assets\_Imports\Scripts\NonBehaviours\BallisticsSettings.cs" />
     <Compile Include="Assets\_Imports\Scripts\NonBehaviours\Ballistics\Misc.cs" />
     <Compile Include="Assets\_Imports\Scripts\NonBehaviours\Ballistics\PrincipalProjectile.cs" />
     <Compile Include="Assets\_Imports\Scripts\NonBehaviours\Ballistics\PrincipalSpace3D.cs" />
@@ -123,13 +140,14 @@
     <Compile Include="Assets\_Imports\Scripts\NonBehaviours\Ballistics\Projectile3D.cs" />
     <Compile Include="Assets\_Imports\Scripts\NonBehaviours\Ballistics\Trajectory3D.cs" />
     <Compile Include="Assets\_Imports\Scripts\NonBehaviours\Ballistics\TurretHelper.cs" />
+    <Compile Include="Assets\_Imports\Scripts\NonBehaviours\BallisticsSettings.cs" />
     <Compile Include="Assets\_Imports\Scripts\NonBehaviours\MechanicMotorDrive.cs" />
     <Compile Include="Assets\_Imports\Scripts\Unit.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\_Imports\Detonator Explosion Framework\Resources\Detonator\Textures\HeatDistort.shader" />
     <None Include="Assets\_Imports\WatchTower\ReadMe.txt" />
     <None Include="Assets\_Imports\readme.txt" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

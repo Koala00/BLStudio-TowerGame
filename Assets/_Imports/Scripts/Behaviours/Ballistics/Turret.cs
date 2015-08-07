@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Collections;
 using Ballistics;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
 // An example implementation of an automatic turret with targetting, pitch and yaw 
 // control and recoil. This classes indirectly uses most of the classes in this sample.
@@ -108,6 +109,7 @@ public class Turret : MonoBehaviour
         {
             _barrelRecoil.StartRecoil(relativeProjectileSpeed);
         }
+        ExecuteEvents.ExecuteHierarchy<IHandleMissleLaunched>(gameObject, null, (msg, data) => msg.Launched());
         targetTransform = null; // Forget target so we don't shoot again in in this round.
     }
 

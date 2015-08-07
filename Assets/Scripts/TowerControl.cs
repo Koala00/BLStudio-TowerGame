@@ -7,11 +7,12 @@ using UnityEngine;
 /// <summary>
 /// Tower behavior (shooting on command, taking damage, dying).
 /// </summary>
-class TowerControl: MonoBehaviour
+class TowerControl: MonoBehaviour, IHandleMissleLaunched
 {
     public int playerNumber;
     public int life = ConfigurationElements.tower_Life;
-    public GameObject ExplosionPrefab;
+    public GameObject ExplosionHit;
+    public GameObject ExplosionDestroyed;
 
     public IEnumerable<TowerControl> GetEnemyTowersInReach()
     {
@@ -35,6 +36,8 @@ class TowerControl: MonoBehaviour
     {
         var shootingTurret = GetComponent<Turret>();
         shootingTurret.targetTransform = targetTower.transform;
+        // Note that it takes time to turn the turret before shooting. Therefore we do not play the shooting sound until the missle was launched.
+        // For that we get an event IHandleMissleLaunched from the Turret script.
     }
 
     public void SetColor(int player)
@@ -46,7 +49,6 @@ class TowerControl: MonoBehaviour
     // Tower got hit?
     void OnTriggerEnter(Collider other)
     {
-        Explode();
         ReduceTowerHeight();
         ReduceLifeAndDestroyIfZero();
     }
@@ -55,7 +57,12 @@ class TowerControl: MonoBehaviour
     {
         life -= 1;
         if (life <= 0)
+        {
+            ExplodeDestroyed();
             Destroy();
+        }
+        else
+            ExplodeHit();
     }
 
     private void ReduceTowerHeight()
@@ -64,18 +71,25 @@ class TowerControl: MonoBehaviour
         this.transform.Translate(new Vector3(0, -1.7f / (ConfigurationElements.tower_Life - 1), 0));
     }
 
-    private void Explode()
+    private void ExplodeHit()
     {
-        Instantiate(ExplosionPrefab, transform.position, transform.rotation);
+        var turret = transform.GetChild(1);
+        Instantiate(ExplosionHit, turret.position, turret.rotation);
+    }
+
+    private void ExplodeDestroyed()
+    {
+        var turret = transform.GetChild(1);
+        Instantiate(ExplosionDestroyed, turret.position, transform.rotation);
     }
 
     private void Destroy()
     {
         // Destroy tower with delay.
         Destroy(gameObject, .5f);
-        HexPosition position = new HexPosition(transform.position);
         var towerControl = GetComponent<TowerControl>();
-        position.unselect("Player" + towerControl.playerNumber);
+        //HexPosition position = new HexPosition(transform.position);
+        //position.unselect("Player" + towerControl.playerNumber);
         GridPositionElements.DecreasePositionControl(transform.position, towerControl.playerNumber);
     }
 
@@ -86,4 +100,14 @@ class TowerControl: MonoBehaviour
         return hexPos1.dist(hexPos2);
     }
 
+    public void Launched()
+    {
+        MakeShootingSound();
+    }
+
+    private void MakeShootingSound()
+    {
+        var detonator = transform.GetComponentInChildren<Detonator>();
+        detonator.Explode();
+    }
 }

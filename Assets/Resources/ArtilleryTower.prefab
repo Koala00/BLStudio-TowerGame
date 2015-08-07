@@ -59,6 +59,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 449810}
+  - 114: {fileID: 11404470}
+  - 114: {fileID: 11490574}
   m_Layer: 0
   m_Name: muzzle
   m_TagString: Untagged
@@ -239,7 +241,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 130698}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.40590894, y: 1.73325559e-16, z: -7.80589008}
+  m_LocalPosition: {x: .0436463915, y: 1.56367113e-16, z: -7.04214859}
   m_LocalScale: {x: 300, y: 300, z: 300}
   m_Children:
   - {fileID: 408484}
@@ -476,6 +478,42 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &11404470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 125746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b4007f1233a9b74fa9be42583fafba6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: .5
+  color: {r: 1, g: .423000008, b: 0, a: .5}
+  explodeOnStart: 0
+  duration: .5
+  detail: 1
+  upwardsBias: 0
+  destroyTime: 7
+  useWorldSpace: 1
+  direction: {x: 0, y: 0, z: 0}
+  fireballAMaterial: {fileID: 0}
+  fireballBMaterial: {fileID: 0}
+  smokeAMaterial: {fileID: 0}
+  smokeBMaterial: {fileID: 0}
+  shockwaveMaterial: {fileID: 0}
+  sparksMaterial: {fileID: 0}
+  glowMaterial: {fileID: 0}
+  heatwaveMaterial: {fileID: 0}
+  autoCreateFireball: 1
+  autoCreateSparks: 1
+  autoCreateShockwave: 1
+  autoCreateSmoke: 1
+  autoCreateGlow: 1
+  autoCreateLight: 1
+  autoCreateForce: 1
+  autoCreateHeatwave: 0
 --- !u!114 &11424788
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -521,7 +559,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNumber: 0
   life: 10
-  ExplosionPrefab: {fileID: 189254, guid: b756681086ad43f4e9f0382fddd7dcb1, type: 2}
+  ExplosionHit: {fileID: 100000, guid: 67e5b9f09995840449c988b145cc1d7b, type: 2}
+  ExplosionDestroyed: {fileID: 100000, guid: 2d036894dd2a9024a978924c521444bf, type: 2}
 --- !u!114 &11466220
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -582,6 +621,45 @@ MonoBehaviour:
     velocity: 0
     maxVelocity: 400
     maxAcceleration: 250
+--- !u!114 &11490574
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 125746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b0ca7171ed55c4eaaf9aba39d05e87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  on: 1
+  detonatorControlled: 1
+  startSize: 1
+  size: 1
+  explodeDelayMin: 0
+  explodeDelayMax: 0
+  startDuration: 2
+  duration: 1
+  timeScale: 1
+  startDetail: 1
+  detail: 1
+  startColor: {r: 1, g: 1, b: 1, a: 1}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  startLocalPosition: {x: 0, y: 0, z: 0}
+  localPosition: {x: 0, y: 0, z: 0}
+  startForce: {x: 0, y: 0, z: 0}
+  force: {x: 0, y: 0, z: 0}
+  startVelocity: {x: 0, y: 0, z: 0}
+  velocity: {x: 0, y: 0, z: 0}
+  detailThreshold: 0
+  nearSounds:
+  - {fileID: 8300000, guid: 8581f806dddef8046b4942de05b897be, type: 3}
+  farSounds:
+  - {fileID: 8300000, guid: 8b76cff51a7d7e844b0adf5da4371ec6, type: 3}
+  distanceThreshold: 20
+  minVolume: .100000001
+  maxVolume: .200000003
+  rolloffFactor: .5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -590,13 +668,41 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: farSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: nearSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: ExplosionPrefab
       value: 
-      objectReference: {fileID: 189254, guid: b756681086ad43f4e9f0382fddd7dcb1, type: 2}
+      objectReference: {fileID: 100000, guid: 67e5b9f09995840449c988b145cc1d7b, type: 2}
+    - target: {fileID: 0}
+      propertyPath: ExplosionHit
+      value: 
+      objectReference: {fileID: 100000, guid: 67e5b9f09995840449c988b145cc1d7b, type: 2}
+    - target: {fileID: 0}
+      propertyPath: ExplosionDestroy
+      value: 
+      objectReference: {fileID: 100000, guid: 2d036894dd2a9024a978924c521444bf, type: 2}
+    - target: {fileID: 0}
+      propertyPath: ExplosionDestroyed
+      value: 
+      objectReference: {fileID: 100000, guid: 2d036894dd2a9024a978924c521444bf, type: 2}
+    - target: {fileID: 0}
+      propertyPath: nearSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8581f806dddef8046b4942de05b897be, type: 3}
+    - target: {fileID: 0}
+      propertyPath: farSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8b76cff51a7d7e844b0adf5da4371ec6, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 130698}
