@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.2f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -70,7 +68,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\ConfigurationElements.cs" />
+    <Compile Include="Assets\Scripts\Events\IHandleEndTurn.cs" />
+    <Compile Include="Assets\Scripts\Events\IHandleMissleLaunched.cs" />
+    <Compile Include="Assets\Scripts\Events\IUpdateUi.cs" />
     <Compile Include="Assets\Scripts\GameEnd\GameEnd.cs" />
     <Compile Include="Assets\Scripts\GameEnd\GameEndAfterNTurns.cs" />
     <Compile Include="Assets\Scripts\GameEnd\GameEndPercentageControlled.cs" />
@@ -79,20 +79,47 @@
     <Compile Include="Assets\Scripts\GridCellFiller.cs" />
     <Compile Include="Assets\Scripts\GridPositionElements.cs" />
     <Compile Include="Assets\Scripts\GridTowers.cs" />
-    <Compile Include="Assets\Scripts\KeyboardCameraControl.cs" />
     <Compile Include="Assets\Scripts\Menu\IOptionsGroup.cs" />
     <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Menu\OptionsMenu.cs" />
     <Compile Include="Assets\Scripts\Menu\UIGameEnd.cs" />
-    <Compile Include="Assets\Scripts\Messages\IHandleEndTurn.cs" />
-    <Compile Include="Assets\Scripts\Messages\IHandleMissleLaunched.cs" />
-    <Compile Include="Assets\Scripts\Messages\IUpdateUi.cs" />
-    <Compile Include="Assets\Scripts\MouseCameraControl.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\Settings\ConfigurationElements.cs" />
     <Compile Include="Assets\Scripts\Settings\GameRuleSettings.cs" />
     <Compile Include="Assets\Scripts\Settings\GlobalSettings.cs" />
     <Compile Include="Assets\Scripts\TowerControl.cs" />
     <Compile Include="Assets\Scripts\UI.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\Behaviours\BackAndForthKinematics.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\Behaviours\Ballistics\BarrelRecoil.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\Behaviours\Ballistics\ProjectileKinematics.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\Behaviours\Ballistics\TrajectoryAboveMeshesPlanner.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\Behaviours\Ballistics\TrajectoryCurvinessPlanner.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\Behaviours\Ballistics\TrajectoryInitialSlopePlanner.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\Behaviours\Ballistics\TrajectoryInitialSpeedPlanner.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\Behaviours\Ballistics\TrajectoryMinimalInitialSpeedPlanner.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\Behaviours\Ballistics\TrajectoryPlannerBase.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\Behaviours\Ballistics\TrajectoryTargetSlopePlanner.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\Behaviours\Ballistics\TrajectoryTimePlanner.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\Behaviours\Ballistics\Turret.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\Behaviours\CameraFlyControl.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\Behaviours\DelayedDestroyOnTrigger.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\Behaviours\GlobalSettingsGUI.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\Behaviours\PitchMotorControl.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\Behaviours\TargetMoveControl.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\Behaviours\WindDrivenParticleVelocity.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\Behaviours\YawMotorControl.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\NonBehaviours\Ballistics\Misc.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\NonBehaviours\Ballistics\PrincipalProjectile.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\NonBehaviours\Ballistics\PrincipalSpace3D.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\NonBehaviours\Ballistics\PrincipalTimePlanners.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\NonBehaviours\Ballistics\PrincipalTrajectory.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\NonBehaviours\Ballistics\Projectile3D.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\NonBehaviours\Ballistics\Trajectory3D.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\NonBehaviours\Ballistics\TurretHelper.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\NonBehaviours\BallisticsSettings.cs" />
+    <Compile Include="Assets\_Imports\Ballistic Trajectories\Scripts\NonBehaviours\MechanicMotorDrive.cs" />
+    <Compile Include="Assets\_Imports\Camera Controls\KeyboardCameraControl.cs" />
+    <Compile Include="Assets\_Imports\Camera Controls\MouseCameraControl.cs" />
     <Compile Include="Assets\_Imports\Detonator Explosion Framework\Sample Supporting Emitters\DetonatorSprayHelper.cs" />
     <Compile Include="Assets\_Imports\Detonator Explosion Framework\System\Detonator.cs" />
     <Compile Include="Assets\_Imports\Detonator Explosion Framework\System\DetonatorBurstEmitter.cs" />
@@ -110,49 +137,19 @@
     <Compile Include="Assets\_Imports\Detonator Explosion Framework\System\DetonatorSpray.cs" />
     <Compile Include="Assets\_Imports\Detonator Explosion Framework\TestScene\DetonatorTest.cs" />
     <Compile Include="Assets\_Imports\Detonator Explosion Framework\TestScene\TouchToMouse.cs" />
-    <Compile Include="Assets\_Imports\Scripts\AI.cs" />
-    <Compile Include="Assets\_Imports\Scripts\AStar.cs" />
-    <Compile Include="Assets\_Imports\Scripts\Behaviours\BackAndForthKinematics.cs" />
-    <Compile Include="Assets\_Imports\Scripts\Behaviours\Ballistics\BarrelRecoil.cs" />
-    <Compile Include="Assets\_Imports\Scripts\Behaviours\Ballistics\ProjectileKinematics.cs" />
-    <Compile Include="Assets\_Imports\Scripts\Behaviours\Ballistics\TrajectoryAboveMeshesPlanner.cs" />
-    <Compile Include="Assets\_Imports\Scripts\Behaviours\Ballistics\TrajectoryCurvinessPlanner.cs" />
-    <Compile Include="Assets\_Imports\Scripts\Behaviours\Ballistics\TrajectoryInitialSlopePlanner.cs" />
-    <Compile Include="Assets\_Imports\Scripts\Behaviours\Ballistics\TrajectoryInitialSpeedPlanner.cs" />
-    <Compile Include="Assets\_Imports\Scripts\Behaviours\Ballistics\TrajectoryMinimalInitialSpeedPlanner.cs" />
-    <Compile Include="Assets\_Imports\Scripts\Behaviours\Ballistics\TrajectoryPlannerBase.cs" />
-    <Compile Include="Assets\_Imports\Scripts\Behaviours\Ballistics\TrajectoryTargetSlopePlanner.cs" />
-    <Compile Include="Assets\_Imports\Scripts\Behaviours\Ballistics\TrajectoryTimePlanner.cs" />
-    <Compile Include="Assets\_Imports\Scripts\Behaviours\Ballistics\Turret.cs" />
-    <Compile Include="Assets\_Imports\Scripts\Behaviours\CameraFlyControl.cs" />
-    <Compile Include="Assets\_Imports\Scripts\Behaviours\DelayedDestroyOnTrigger.cs" />
-    <Compile Include="Assets\_Imports\Scripts\Behaviours\GlobalSettingsGUI.cs" />
-    <Compile Include="Assets\_Imports\Scripts\Behaviours\PitchMotorControl.cs" />
-    <Compile Include="Assets\_Imports\Scripts\Behaviours\TargetMoveControl.cs" />
-    <Compile Include="Assets\_Imports\Scripts\Behaviours\WindDrivenParticleVelocity.cs" />
-    <Compile Include="Assets\_Imports\Scripts\Behaviours\YawMotorControl.cs" />
-    <Compile Include="Assets\_Imports\Scripts\HexEntry.cs" />
-    <Compile Include="Assets\_Imports\Scripts\HexGrid.cs" />
-    <Compile Include="Assets\_Imports\Scripts\HexGridOriginal.cs" />
-    <Compile Include="Assets\_Imports\Scripts\HexPosition.cs" />
-    <Compile Include="Assets\_Imports\Scripts\Human.cs" />
-    <Compile Include="Assets\_Imports\Scripts\NegativeBinomialDistribution.cs" />
-    <Compile Include="Assets\_Imports\Scripts\NonBehaviours\Ballistics\Misc.cs" />
-    <Compile Include="Assets\_Imports\Scripts\NonBehaviours\Ballistics\PrincipalProjectile.cs" />
-    <Compile Include="Assets\_Imports\Scripts\NonBehaviours\Ballistics\PrincipalSpace3D.cs" />
-    <Compile Include="Assets\_Imports\Scripts\NonBehaviours\Ballistics\PrincipalTimePlanners.cs" />
-    <Compile Include="Assets\_Imports\Scripts\NonBehaviours\Ballistics\PrincipalTrajectory.cs" />
-    <Compile Include="Assets\_Imports\Scripts\NonBehaviours\Ballistics\Projectile3D.cs" />
-    <Compile Include="Assets\_Imports\Scripts\NonBehaviours\Ballistics\Trajectory3D.cs" />
-    <Compile Include="Assets\_Imports\Scripts\NonBehaviours\Ballistics\TurretHelper.cs" />
-    <Compile Include="Assets\_Imports\Scripts\NonBehaviours\BallisticsSettings.cs" />
-    <Compile Include="Assets\_Imports\Scripts\NonBehaviours\MechanicMotorDrive.cs" />
-    <Compile Include="Assets\_Imports\Scripts\Unit.cs" />
+    <Compile Include="Assets\_Imports\HexGrid\Scripts\AI.cs" />
+    <Compile Include="Assets\_Imports\HexGrid\Scripts\AStar.cs" />
+    <Compile Include="Assets\_Imports\HexGrid\Scripts\HexEntry.cs" />
+    <Compile Include="Assets\_Imports\HexGrid\Scripts\HexGrid.cs" />
+    <Compile Include="Assets\_Imports\HexGrid\Scripts\HexGridOriginal.cs" />
+    <Compile Include="Assets\_Imports\HexGrid\Scripts\HexPosition.cs" />
+    <Compile Include="Assets\_Imports\HexGrid\Scripts\Human.cs" />
+    <Compile Include="Assets\_Imports\HexGrid\Scripts\NegativeBinomialDistribution.cs" />
+    <Compile Include="Assets\_Imports\HexGrid\Scripts\Unit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\_Imports\Detonator Explosion Framework\Resources\Detonator\Textures\HeatDistort.shader" />
-    <None Include="Assets\_Imports\WatchTower\ReadMe.txt" />
-    <None Include="Assets\_Imports\readme.txt" />
+    <None Include="Assets\_Imports\Readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
