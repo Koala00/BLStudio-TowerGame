@@ -6,7 +6,7 @@ using System;
 /// <summary>
 /// Controls the option menu group "Game End".
 /// </summary>
-public class UIGameEnd : MonoBehaviour, IOptionsGroup
+public class UIGameEndSettings : MonoBehaviour, IOptionsGroup
 {
     public Toggle AfterNTurnsToggle;
     public Toggle AfterNPercentToggle;
@@ -32,7 +32,8 @@ public class UIGameEnd : MonoBehaviour, IOptionsGroup
         AfterNPercentToggle.isOn = gameEndType == GameEndType.AfterPercentageCovered;
         AfterNTurnsSlider.value = GameRuleSettings.Instance.GameEnd.Turns;
         AfterNPercentSlider.value = GameRuleSettings.Instance.GameEnd.Percentage;
-        PlayerPrefsSerializer<GameEndSettings>.Create().Load();
+        SetTurnsText(AfterNTurnsSlider.value);
+        SetPercentageText(AfterNPercentSlider.value);
     }
 
     public void Save()

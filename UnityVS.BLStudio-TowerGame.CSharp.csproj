@@ -84,7 +84,9 @@
     <Compile Include="Assets\Scripts\Menu\IOptionsGroup.cs" />
     <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Menu\OptionsMenu.cs" />
-    <Compile Include="Assets\Scripts\Menu\UIGameEnd.cs" />
+    <Compile Include="Assets\Scripts\Menu\UITowerSettings.cs" />
+    <Compile Include="Assets\Scripts\Menu\UIBoardSettings.cs" />
+    <Compile Include="Assets\Scripts\Menu\UIGameEndSettings.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Settings\ConfigurationElements.cs" />
     <Compile Include="Assets\Scripts\Settings\GameRuleSettings.cs" />
