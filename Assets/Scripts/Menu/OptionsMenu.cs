@@ -31,6 +31,7 @@ public class OptionsMenu : MonoBehaviour
         var optionGroups = GetComponentsInChildren<IOptionsGroup>();
         foreach (var group in optionGroups)
             group.Save();
+        GlobalSettings.Instance.SaveInPlayerPrefs();
         GoToMainMenu();
     }
 

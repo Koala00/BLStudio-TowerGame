@@ -24,9 +24,22 @@ public class GlobalSettings : MonoBehaviour
                 _instance = globalsObject.GetComponent<GlobalSettings>();
                 if (_instance == null) 
                     Debug.LogError("Failed to get the GlobalSettings component from the gameobject 'Resources/GlobalSettings'");
+                // Try load settings from user preferences.
+                _instance.gameRuleSettings.LoadFromPlayerPrefs();
             }
             return _instance;
         }
+    }
+
+    public void SaveInPlayerPrefs()
+    {
+        gameRuleSettings.SaveInPlayerPrefs();
+    }
+
+    public void Reset()
+    {
+        gameRuleSettings.ClearFromPlayerPrefs();
+        _instance = null;
     }
 
     public void Awake()

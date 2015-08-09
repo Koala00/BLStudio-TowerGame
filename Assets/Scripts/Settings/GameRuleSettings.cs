@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 [System.Serializable]
 public class GameRuleSettings
@@ -11,6 +12,21 @@ public class GameRuleSettings
     public static GameRuleSettings Instance
     {
         get { return GlobalSettings.Instance.gameRuleSettings; }
+    }
+
+    public void SaveInPlayerPrefs()
+    {
+        PlayerPrefsSerializer<GameRuleSettings>.Create().Save(this);
+    }
+
+    public void LoadFromPlayerPrefs()
+    {
+        PlayerPrefsSerializer<GameRuleSettings>.Create().Load(this);
+    }
+
+    public void ClearFromPlayerPrefs()
+    {
+        PlayerPrefsSerializer<GameRuleSettings>.Create().Clear();
     }
 }
 

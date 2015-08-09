@@ -32,6 +32,7 @@ public class UIGameEnd : MonoBehaviour, IOptionsGroup
         AfterNPercentToggle.isOn = gameEndType == GameEndType.AfterPercentageCovered;
         AfterNTurnsSlider.value = GameRuleSettings.Instance.GameEnd.Turns;
         AfterNPercentSlider.value = GameRuleSettings.Instance.GameEnd.Percentage;
+        PlayerPrefsSerializer<GameEndSettings>.Create().Load();
     }
 
     public void Save()
