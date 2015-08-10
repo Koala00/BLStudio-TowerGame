@@ -17,7 +17,7 @@ class GameEndPercentageControlled : ICheckGameEnd
     public bool IsGameEnd()
     {
         int[] scores = GridPositionElements.GetNumberOfControlledPositionsPerPlayer();
-        int totalPositions = ConfigurationElements.board_size_x * ConfigurationElements.board_size_z;
+        int totalPositions = GameRuleSettings.Instance.Board.Width * GameRuleSettings.Instance.Board.Height;
         int maxScore = totalPositions * Percentage / 100;
         int score = scores.Max();
         ProgressLabel.text = String.Format("Highest score: {0} - Game end score: {1}", score, maxScore);

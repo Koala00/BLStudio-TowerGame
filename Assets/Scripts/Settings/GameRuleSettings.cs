@@ -8,6 +8,7 @@ public class GameRuleSettings
     public BoardSettings Board;
     public TowerSettings Tower;
     public GameEndSettings GameEnd;
+    public PlayerSettings Player;
 
     public static GameRuleSettings Instance
     {
@@ -51,6 +52,21 @@ public class GameEndSettings
     public GameEndType Type;
     public int Turns;
     public int Percentage;
+}
+
+[System.Serializable]
+public class PlayerSettings
+{
+    public Color[] colors = { Color.red, Color.blue, Color.cyan, Color.green };
+    public Color[] lerpedColors; // Will be initialized later based on PlayerColors.
+
+    // initialisation section
+    public PlayerSettings()
+    {
+        lerpedColors = new Color[colors.Length];
+        for (int player = 0; player < colors.Length; player++)
+            lerpedColors[player] = Color.Lerp(Color.white, colors[player], 0.5f);
+    }
 }
 
 [System.Serializable]

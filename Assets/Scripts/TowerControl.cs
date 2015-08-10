@@ -10,7 +10,7 @@ using UnityEngine;
 class TowerControl: MonoBehaviour, IHandleMissleLaunched
 {
     public int playerNumber;
-    public int life = ConfigurationElements.tower_Life;
+    public int life = GameRuleSettings.Instance.Tower.Hitpoints;
     public GameObject ExplosionHit;
     public GameObject ExplosionDestroyed;
 
@@ -24,7 +24,7 @@ class TowerControl: MonoBehaviour, IHandleMissleLaunched
         {   // count towers in reach = not same position and not same player number ; and distance < x)
             if (transform.position != targetTower.transform.position
                 && playerNumber != targetTower.playerNumber
-                && calculateDistance(transform.position, targetTower.transform.position) <= ConfigurationElements.towers_reachDistance)
+                && calculateDistance(transform.position, targetTower.transform.position) <= GameRuleSettings.Instance.Tower.ShootingDistance)
             {
                 towersInReach.Add(targetTower);
             }
@@ -43,7 +43,7 @@ class TowerControl: MonoBehaviour, IHandleMissleLaunched
     public void SetColor(int player)
     {
         var renderer = transform.GetChild(0).GetComponent<MeshRenderer>();
-        renderer.material.color = ConfigurationElements.players_lerpedColor[player];
+        renderer.material.color = GameRuleSettings.Instance.Player.lerpedColors[player];
     }
 
     // Tower got hit?
@@ -68,7 +68,7 @@ class TowerControl: MonoBehaviour, IHandleMissleLaunched
     private void ReduceTowerHeight()
     {
         // Make the tower sink into the ground until only the turret shows out when it has no life.
-        this.transform.Translate(new Vector3(0, -1.7f / (ConfigurationElements.tower_Life - 1), 0));
+        this.transform.Translate(new Vector3(0, -1.7f / (GameRuleSettings.Instance.Tower.Hitpoints - 1), 0));
     }
 
     private void ExplodeHit()

@@ -104,13 +104,13 @@ public class Grid : MonoBehaviour
 
     public static bool checkElementInsideGrid (Vector3 position)
     {
-        if ((position.x >= ConfigurationElements.board_size_x) || (position.z >= ConfigurationElements.board_size_z))
+        if ((position.x >= GameRuleSettings.Instance.Board.Width) || (position.z >= GameRuleSettings.Instance.Board.Height))
             return false;
-        if ((position.x <= -ConfigurationElements.board_size_x) || (position.z >= ConfigurationElements.board_size_z))
+        if ((position.x <= -GameRuleSettings.Instance.Board.Width) || (position.z >= GameRuleSettings.Instance.Board.Height))
             return false;
-        if ((position.x >= ConfigurationElements.board_size_x) || (position.z <= -ConfigurationElements.board_size_z))
+        if ((position.x >= GameRuleSettings.Instance.Board.Width) || (position.z <= -GameRuleSettings.Instance.Board.Height))
             return false;
-        if ((position.x <= -ConfigurationElements.board_size_x) || (position.z <= -ConfigurationElements.board_size_z))
+        if ((position.x <= -GameRuleSettings.Instance.Board.Width) || (position.z <= -GameRuleSettings.Instance.Board.Height))
             return false;
 
         return true;

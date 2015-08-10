@@ -54,13 +54,13 @@ class GridPositionElements
                 else
                 {
                     cellColoring.SetActive(true);
-                    cellColoring.GetComponent<Renderer>().material.color = ConfigurationElements.players_lerpedColor[GetPlayerInControl()];
+                    cellColoring.GetComponent<Renderer>().material.color = GameRuleSettings.Instance.Player.lerpedColors[GetPlayerInControl()];
                 }
             }
             else // position contains a tower
             {
                 cellColoring.SetActive(true);
-                cellColoring.GetComponent<Renderer>().material.color = ConfigurationElements.players_lerpedColor[TowerOfPlayer];
+                cellColoring.GetComponent<Renderer>().material.color = GameRuleSettings.Instance.Player.lerpedColors[TowerOfPlayer];
             }
         }
 
@@ -119,7 +119,7 @@ class GridPositionElements
         control.TowerOfPlayer = player;
 
         // recalculate position controls
-        foreach (var neighbor in ControlledPositionsAround(position, ConfigurationElements.towers_ControlDistance))
+        foreach (var neighbor in ControlledPositionsAround(position, GameRuleSettings.Instance.Tower.ControlDistance))
         {
             neighbor.IncreaseControl(player);
         }
@@ -134,7 +134,7 @@ class GridPositionElements
             control.TowerOfPlayer = Player.NoPlayer;
 
         // recalculate position controls
-        foreach (var neighbor in ControlledPositionsAround(position, ConfigurationElements.towers_ControlDistance))
+        foreach (var neighbor in ControlledPositionsAround(position, GameRuleSettings.Instance.Tower.ControlDistance))
         {
             neighbor.DecreaseControl(player);
         }

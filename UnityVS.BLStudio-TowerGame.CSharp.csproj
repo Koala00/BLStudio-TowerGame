@@ -86,7 +86,6 @@
     <Compile Include="Assets\Scripts\Menu\OptionsMenu.cs" />
     <Compile Include="Assets\Scripts\Menu\UIGameEnd.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
-    <Compile Include="Assets\Scripts\Settings\ConfigurationElements.cs" />
     <Compile Include="Assets\Scripts\Settings\GameRuleSettings.cs" />
     <Compile Include="Assets\Scripts\Settings\GlobalSettings.cs" />
     <Compile Include="Assets\Scripts\Settings\PlayerPrefsSerializer.cs" />
@@ -152,7 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\_Imports\Detonator Explosion Framework\Resources\Detonator\Textures\HeatDistort.shader" />
-    <None Include="Assets\_Imports\readme.txt" />
+    <None Include="Assets\_Imports\Readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
