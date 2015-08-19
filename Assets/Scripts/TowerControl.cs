@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 /// <summary>
 /// Tower behavior (shooting on command, taking damage, dying).
@@ -10,21 +11,42 @@ using UnityEngine;
 class TowerControl: MonoBehaviour, IHandleMissleLaunched
 {
     public int playerNumber;
-    public int life = ConfigurationElements.tower_Life;
+    public int life;
     public GameObject ExplosionHit;
     public GameObject ExplosionDestroyed;
+    private GameObject Board;
+    private HexCoord Position
+    {
+        get
+        {
+            if (!_Position.HasValue)
+                _Position = HexCoord.AtPosition3d(transform.localPosition / HexBoard.TileScale);
+            return _Position.Value;
+        }
+    }
+    private HexCoord? _Position;
+
+
+
+    void Start()
+    {
+        Board = transform.parent.gameObject;
+        var settings = GlobalSettings.Instance.gameRuleSettings.Tower;
+        life = settings.Hitpoints;
+    }
 
     public IEnumerable<TowerControl> GetEnemyTowersInReach()
     {
         Transform towerContainer = transform.parent;
         var towersInReach = new List<TowerControl>();
-
+        var settings = GlobalSettings.Instance.gameRuleSettings.Tower;
         var allTtowers = towerContainer.GetComponentsInChildren<TowerControl>();
         foreach (TowerControl targetTower in allTtowers)
-        {   // count towers in reach = not same position and not same player number ; and distance < x)
+        {
+            // count towers in reach = not same position and not same player number ; and distance < x)
             if (transform.position != targetTower.transform.position
                 && playerNumber != targetTower.playerNumber
-                && calculateDistance(transform.position, targetTower.transform.position) <= ConfigurationElements.towers_reachDistance)
+                && CalculateDistance(Position, targetTower.Position) <= settings.ShootingDistance)
             {
                 towersInReach.Add(targetTower);
             }
@@ -40,10 +62,14 @@ class TowerControl: MonoBehaviour, IHandleMissleLaunched
         // For that we get an event IHandleMissleLaunched from the Turret script.
     }
 
+    /// <summary>
+    /// Colors the tower base in the player's color.
+    /// </summary>
+    /// <param name="player"></param>
     public void SetColor(int player)
     {
         var renderer = transform.GetChild(0).GetComponent<MeshRenderer>();
-        renderer.material.color = ConfigurationElements.players_lerpedColor[player];
+        renderer.material.color = GameRuleSettings.players_lerpedColor[player];
     }
 
     // Tower got hit?
@@ -51,6 +77,12 @@ class TowerControl: MonoBehaviour, IHandleMissleLaunched
     {
         ReduceTowerHeight();
         ReduceLifeAndDestroyIfZero();
+        InformBoardAboutHit();
+    }
+
+    private void InformBoardAboutHit()
+    {
+        ExecuteEvents.ExecuteHierarchy<IHandleMissleHit>(Board, null, (msg, data) => msg.HitByMissle());
     }
 
     private void ReduceLifeAndDestroyIfZero()
@@ -67,8 +99,9 @@ class TowerControl: MonoBehaviour, IHandleMissleLaunched
 
     private void ReduceTowerHeight()
     {
+        var settings = GlobalSettings.Instance.gameRuleSettings.Tower;
         // Make the tower sink into the ground until only the turret shows out when it has no life.
-        this.transform.Translate(new Vector3(0, -1.7f / (ConfigurationElements.tower_Life - 1), 0));
+        this.transform.Translate(new Vector3(0, -1.7f / (settings.Hitpoints - 1), 0));
     }
 
     private void ExplodeHit()
@@ -88,21 +121,25 @@ class TowerControl: MonoBehaviour, IHandleMissleLaunched
         // Destroy tower with delay.
         Destroy(gameObject, .5f);
         var towerControl = GetComponent<TowerControl>();
-        //HexPosition position = new HexPosition(transform.position);
-        //position.unselect("Player" + towerControl.playerNumber);
-        GridPositionElements.DecreasePositionControl(transform.position, towerControl.playerNumber);
+        var gridPositionElements = Board.GetComponent<GridPositionElements>();
+        gridPositionElements.DecreasePositionControl(Position, towerControl.playerNumber);
+        gridPositionElements.UpdateColors();
     }
 
-    private static int calculateDistance(Vector3 position1, Vector3 position2)
+    private static int CalculateDistance(HexCoord position1, HexCoord position2)
     {
-        var hexPos1 = new HexPosition(position1);
-        var hexPos2 = new HexPosition(position2);
-        return hexPos1.dist(hexPos2);
+        return HexCoord.Distance(position1, position2);
     }
 
-    public void Launched()
+    public void LaunchedMissle()
     {
         MakeShootingSound();
+        InformBoardAboutLaunch();
+    }
+
+    private void InformBoardAboutLaunch()
+    {
+        ExecuteEvents.ExecuteHierarchy<IHandleMissleLaunched>(Board, null, (msg, data) => msg.LaunchedMissle());
     }
 
     private void MakeShootingSound()

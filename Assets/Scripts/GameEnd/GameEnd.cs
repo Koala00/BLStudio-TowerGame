@@ -9,16 +9,29 @@ class GameEnd : MonoBehaviour, IHandleEndTurn
 {
     public GameObject GameOverPanel;
     public GameObject GameProgressPanel;
-    private ICheckGameEnd GameOverChecker;
+    public GridPositionElements GridPositionElements;
+    private ICheckGameEnd GameOverChecker
+    {
+        get {
+            return _GameOverChecker ?? CreateGameOverChecker();
+        }
+    }
+    private ICheckGameEnd _GameOverChecker;
 
     public static bool GameEnded { get; private set; }
 
     void Start()
     {
+        CreateGameOverChecker();
+    }
+
+    private ICheckGameEnd CreateGameOverChecker()
+    {
         //GameOverChecker = new GameEndAfterNTurns() { MaxTurns = 20 };
-        GameOverChecker = new GameEndPercentageControlled() { Percentage = 80 };
-        GameOverChecker.ProgressLabel = GameProgressPanel.GetComponentInChildren<Text>();
+        _GameOverChecker = new GameEndPercentageControlled(GridPositionElements) { Percentage = 80 };
+        _GameOverChecker.ProgressLabel = GameProgressPanel.GetComponentInChildren<Text>();
         ToggleVisibility(GameOverPanel, false);
+        return _GameOverChecker;
     }
 
     private void ToggleVisibility(GameObject obj, bool visible)

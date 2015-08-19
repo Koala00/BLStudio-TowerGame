@@ -5,16 +5,21 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-class GridPositionElements
+/// <summary>
+/// Takes care of the fields controlled by each tower.
+/// </summary>
+[RequireComponent(typeof(HexBoard))]
+public class GridPositionElements : MonoBehaviour
 {
-    public static GameObject sampleCellColored;
+    //public static GameObject sampleCellColored;
+    private HexBoard HexBoard;
 
-    private static Dictionary<HexPosition, PositionControl> PositionControls = new Dictionary<HexPosition, PositionControl>();
-
-    public static void Clear()
+    public void Start()
     {
-        PositionControls.Clear();
+        HexBoard = GetComponent<HexBoard>();
     }
+
+    private Dictionary<HexCoord, PositionControl> PositionControls = new Dictionary<HexCoord, PositionControl>();
 
     /// <summary>
     /// Keeps track of which player controls the position.
@@ -24,11 +29,16 @@ class GridPositionElements
     {
         private int[] ControlOfPlayer = new int[Player.Count];
         public int TowerOfPlayer = Player.NoPlayer; // If occupied by a tower of a player, this contains the player number.
-        public GameObject cellColoring;
+        //public GameObject cellColoring;
+        private HexCoord Position;
+        private HexBoard HexBoard;
 
-        public PositionControl (Vector3 position)
+        public PositionControl (HexCoord position, HexBoard hexBoard)
         {
-            cellColoring = (GameObject) GameObject.Instantiate(sampleCellColored, new Vector3(position.x, 0.01f , position.z), sampleCellColored.transform.rotation);
+            //cellColoring = (GameObject) Instantiate(sampleCellColored, new Vector3(position.x, 0.01f , position.z), sampleCellColored.transform.rotation);
+            // TODO: show controlled field
+            Position = position;
+            HexBoard = hexBoard;
         }
 
         public void IncreaseControl(int player)
@@ -46,22 +56,31 @@ class GridPositionElements
 
         public void UpdateColor()
         {
-            if (TowerOfPlayer.Equals(Player.NoPlayer)) // position contains no tower
+            int player = TowerOfPlayer == Player.NoPlayer
+                ? GetPlayerInControl()
+                : TowerOfPlayer;
+            HexBoard.SetTilePlayerColor(Position, player);
+            ShowDebugNumbers();
+        }
+
+        private void ShowDebugNumbers()
+        {
+            string textName = Position.ToString();
+            TextMesh text = HexBoard.GetComponentsInChildren<TextMesh>().FirstOrDefault(c => c.name == textName);
+            if (text == null)
             {
-                int playerInControl = GetPlayerInControl();
-                if (playerInControl.Equals(-1))
-                    cellColoring.SetActive(false);
-                else
-                {
-                    cellColoring.SetActive(true);
-                    cellColoring.GetComponent<Renderer>().material.color = ConfigurationElements.players_lerpedColor[GetPlayerInControl()];
-                }
+                var textObj = new GameObject();
+                textObj.transform.SetParent(HexBoard.transform);
+                textObj.transform.localPosition = Position.Position3d() - new Vector3(0.2f, 0, 0.0f);
+                text = textObj.AddComponent<TextMesh>();
+                textObj.transform.Rotate(new Vector3(90, 0, 0));
+                text.fontSize = 30;
+                text.characterSize = 0.1f;
+                text.color = Color.black;
+                textObj.name = textName;
+                text.name = textName;
             }
-            else // position contains a tower
-            {
-                cellColoring.SetActive(true);
-                cellColoring.GetComponent<Renderer>().material.color = ConfigurationElements.players_lerpedColor[TowerOfPlayer];
-            }
+            text.text = Position.OddRToOffset().ToString("0") + "\n"+ String.Join(", ", ControlOfPlayer.Select(c => c.ToString()).ToArray());
         }
 
         /// <summary>
@@ -89,13 +108,26 @@ class GridPositionElements
         }
     }
 
-    public static void updateColors ()
+    public PositionControl GetPositionControlAt(HexCoord position)
+    {
+        PositionControl positionControl;
+        PositionControls.TryGetValue(position, out positionControl);
+        return positionControl;
+    }
+
+    public bool IsTowerAt(HexCoord position)
+    {
+        var control = GetPositionControlAt(position);
+        return control != null && control.TowerOfPlayer != Player.NoPlayer;
+    }
+
+    public void UpdateColors()
     {
         foreach (var positionControl in PositionControls.Values)
             positionControl.UpdateColor();
     }
 
-    public static int[] GetNumberOfControlledPositionsPerPlayer()
+    public int[] GetNumberOfControlledPositionsPerPlayer()
     {
         int[] playerControl = new int[Player.Count];
         foreach(var positionControl in PositionControls.Values)
@@ -109,32 +141,32 @@ class GridPositionElements
         return playerControl;
     }
 
-    public static void IncreasePositionControl(Vector3 position, int player)
+    public void IncreasePositionControl(HexCoord position, int player)
     {
         // add a PositionControl for the now occupied position, if missing.
         PositionControl control;
-        var hexPosition = new HexPosition(position);
-        if (!PositionControls.TryGetValue(hexPosition, out control))
-            PositionControls.Add(hexPosition, control = new PositionControl(position));
+        if (!PositionControls.TryGetValue(position, out control))
+            PositionControls.Add(position, control = new PositionControl(position, HexBoard));
         control.TowerOfPlayer = player;
 
         // recalculate position controls
-        foreach (var neighbor in ControlledPositionsAround(position, ConfigurationElements.towers_ControlDistance))
+        var settings = GlobalSettings.Instance.gameRuleSettings.Tower;
+        foreach (var neighbor in ControlledPositionsAround(position, settings.ControlDistance))
         {
             neighbor.IncreaseControl(player);
         }
     }
 
-    public static void DecreasePositionControl(Vector3 position, int player)
+    public void DecreasePositionControl(HexCoord position, int player)
     {
         // Remove the mark of the current player from the position.
         PositionControl control;
-        var hexPosition = new HexPosition(position);
-        if (PositionControls.TryGetValue(hexPosition, out control))
+        if (PositionControls.TryGetValue(position, out control))
             control.TowerOfPlayer = Player.NoPlayer;
 
         // recalculate position controls
-        foreach (var neighbor in ControlledPositionsAround(position, ConfigurationElements.towers_ControlDistance))
+        var settings = GlobalSettings.Instance.gameRuleSettings.Tower;
+        foreach (var neighbor in ControlledPositionsAround(position, settings.ControlDistance))
         {
             neighbor.DecreaseControl(player);
         }
@@ -143,55 +175,43 @@ class GridPositionElements
     /// <summary>
     /// Gets infos about who controls the positions around a given position.
     /// </summary>
-    public static IEnumerable<PositionControl> ControlledPositionsAround(Vector3 position, int distance)
+    public IEnumerable<PositionControl> ControlledPositionsAround(HexCoord position, int distance)
     {
-        foreach(HexPosition neighbor in NeighborhoodRespectingBorders(position, distance))
+        foreach(HexCoord neighbor in NeighborhoodRespectingBorders(position, distance))
         {
             PositionControl control;
             if (!PositionControls.TryGetValue(neighbor, out control))
             {
-                control = new PositionControl(neighbor.getPosition());
+                control = new PositionControl(neighbor, HexBoard);
                 PositionControls.Add(neighbor, control);
             }
             yield return control;
         }
     }
 
-    private static IEnumerable<HexPosition> NeighborhoodRespectingBorders(Vector3 position, int distance)
+    private IEnumerable<HexCoord> NeighborhoodRespectingBorders(HexCoord position, int distance)
     {
-        foreach (HexPosition neighbor in Neighborhood(position, distance))
-            if (Grid.checkElementInsideGrid(neighbor.getPosition()))
+        foreach (HexCoord neighbor in Neighborhood(position, distance))
+            if (HexBoard.IsPositionOnBoard(neighbor))
                 yield return neighbor;
-    }
-
-
-    private static IEnumerable<HexPosition> Neighborhood(Vector3 position, int distance)
-    {
-        return Neighborhood(new HexPosition(position), distance);
     }
 
     /// <summary>
     /// Returns all valid positions around the given center within a given distance.
     /// </summary>
-    private static IEnumerable<HexPosition> Neighborhood(HexPosition center, int distance)
+    private static IEnumerable<HexCoord> Neighborhood(HexCoord center, int distance)
     {
-        HexPosition current = center;
-        // Walk around the center in circles (counter clockwise).
+        HexCoord current = center;
+        // Walk around the center in circles.
         for(int radius = 1; radius <= distance; radius++)
         {
-            current = current.N;
-            for (int i = 0; i < radius; i++)
-                yield return current = current.SW;
-            for (int i = 0; i < radius; i++)
-                yield return current = current.S;
-            for (int i = 0; i < radius; i++)
-                yield return current = current.SE;
-            for (int i = 0; i < radius; i++)
-                yield return current = current.NE;
-            for (int i = 0; i < radius; i++)
-                yield return current = current.N;
-            for (int i = 0; i < radius; i++)
-                yield return current = current.NW;
+            current = current.Neighbor(0);
+            for (int i = 0; i < 6; i++)
+            {
+                int direction = (i + 2) % 6;
+                for (int j = 0; j < radius; j++)
+                    yield return current = current.Neighbor(direction);
+            }            
         }
     }
 }

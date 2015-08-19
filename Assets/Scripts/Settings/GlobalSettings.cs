@@ -12,19 +12,17 @@ public class GlobalSettings : MonoBehaviour
 
     public static GlobalSettings Instance
     {
-        get {
+        get
+        {
             if (_instance == null)
             {
                 // Try loading the 'Resources/GlobalSettings' game object prefab
                 GameObject globalsObject = (GameObject)Resources.Load("GlobalSettings", typeof(GameObject));
-                if (globalsObject == null) 
+                if (globalsObject == null)
                     Debug.LogError("Failed to load the gameobject 'Resources/GlobalSettings'");
 
                 // Try using the prefab's GlobalSettings script component as the instance
                 _instance = globalsObject.GetComponent<GlobalSettings>();
-                if (_instance == null) 
-                    Debug.LogError("Failed to get the GlobalSettings component from the gameobject 'Resources/GlobalSettings'");
-                // Try load settings from user preferences.
                 _instance.gameRuleSettings.LoadFromPlayerPrefs();
             }
             return _instance;

@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine.EventSystems;
 
-interface IHandleMissleLaunched: IEventSystemHandler
+interface IHandleMissleHit : IEventSystemHandler
 {
-    void LaunchedMissle();
+    void HitByMissle();
 }
-

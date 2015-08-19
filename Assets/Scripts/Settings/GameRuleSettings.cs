@@ -28,6 +28,18 @@ public class GameRuleSettings
     {
         PlayerPrefsSerializer<GameRuleSettings>.Create().Clear();
     }
+    
+
+    public static readonly Color[] players_color = { Color.red, Color.blue, Color.cyan, Color.green };
+    public static Color[] players_lerpedColor; // Will be initialized later based on PlayerColors.
+
+    // initialisation section
+    static GameRuleSettings()
+    {
+        players_lerpedColor = new Color[players_color.Length];
+        for (int player = 0; player < players_color.Length; player++)
+            players_lerpedColor[player] = Color.Lerp(Color.white, players_color[player], 0.5f);
+    }
 }
 
 [System.Serializable]
@@ -59,3 +71,4 @@ public enum GameEndType
     AfterNTurns,
     AfterPercentageCovered
 }
+

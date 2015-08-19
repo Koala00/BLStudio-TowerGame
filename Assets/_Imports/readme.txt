@@ -17,10 +17,6 @@ http://wiki.unity3d.com/index.php/Scripts/Controllers
 Detonator Explosion Framework,
 https://www.assetstore.unity3d.com/en/#!/content/1
 
-HexGrid,
-https://www.assetstore.unity3d.com/en/?gclid=CNvfgubbmccCFQX3wgodZaUP-Q#!/content/27440
-- lots of changes... Still under process
-
 Post Apocalypse Guns Demo,
 https://www.assetstore.unity3d.com/en/#!/content/33515
 - subset selected; project cleaned
@@ -40,3 +36,7 @@ https://visualstudiogallery.msdn.microsoft.com/20b80b8c-659b-45ef-96c1-437828fe7
 Yughues Free Metal Materials,
 https://www.assetstore.unity3d.com/en/#!/content/12949
 - subset selected; project cleaned
+
+
+HexCoord.cs,
+https://github.com/tejon/HexCoord/blob/master/HexCoord.cs

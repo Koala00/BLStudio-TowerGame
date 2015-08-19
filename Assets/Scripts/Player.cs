@@ -25,6 +25,6 @@ static class Player
     internal static void Reset()
     {
         Current = 0;
-        Turns = 0;
+        Turns = 1;
     }
 }

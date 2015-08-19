@@ -36,6 +36,7 @@ public class UITowerSettings : MonoBehaviour, IOptionsGroup
     {
         var towerSettings = GameRuleSettings.Instance.Tower;
         towerSettings.ShootingDistance = Convert.ToInt32(ShootingRadiusSlider.value);
+        towerSettings.ControlDistance = towerSettings.ShootingDistance; // for now control both settings with the same UI control
         towerSettings.Hitpoints = Convert.ToInt32(HitpointsSlider.value);
     }
 

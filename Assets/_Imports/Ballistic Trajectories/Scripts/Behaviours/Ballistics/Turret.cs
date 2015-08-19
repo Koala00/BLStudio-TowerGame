@@ -113,7 +113,7 @@ public class Turret : MonoBehaviour
         {
             _barrelRecoil.StartRecoil(relativeProjectileSpeed);
         }
-        ExecuteEvents.ExecuteHierarchy<IHandleMissleLaunched>(gameObject, null, (msg, data) => msg.Launched());
+        ExecuteEvents.ExecuteHierarchy<IHandleMissleLaunched>(gameObject, null, (msg, data) => msg.LaunchedMissle());
         targetTransform = null; // Forget target so we don't shoot again in in this round.
     }
 
