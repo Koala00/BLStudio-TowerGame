@@ -31,15 +31,14 @@ class TowerControl: MonoBehaviour, IHandleMissleLaunched
     void Start()
     {
         Board = transform.parent.gameObject;
-        var settings = GlobalSettings.Instance.gameRuleSettings.Tower;
-        life = settings.Hitpoints;
+        life = GameRuleSettings.Instance.Tower.Hitpoints;
     }
 
     public IEnumerable<TowerControl> GetEnemyTowersInReach()
     {
         Transform towerContainer = transform.parent;
         var towersInReach = new List<TowerControl>();
-        var settings = GlobalSettings.Instance.gameRuleSettings.Tower;
+        var settings = GameRuleSettings.Instance.Tower;
         var allTtowers = towerContainer.GetComponentsInChildren<TowerControl>();
         foreach (TowerControl targetTower in allTtowers)
         {
@@ -69,7 +68,7 @@ class TowerControl: MonoBehaviour, IHandleMissleLaunched
     public void SetColor(int player)
     {
         var renderer = transform.GetChild(0).GetComponent<MeshRenderer>();
-        renderer.material.color = GameRuleSettings.players_lerpedColor[player];
+        renderer.material.color = GameRuleSettings.Instance.Player.lerpedColors[player];
     }
 
     // Tower got hit?
@@ -99,9 +98,8 @@ class TowerControl: MonoBehaviour, IHandleMissleLaunched
 
     private void ReduceTowerHeight()
     {
-        var settings = GlobalSettings.Instance.gameRuleSettings.Tower;
         // Make the tower sink into the ground until only the turret shows out when it has no life.
-        this.transform.Translate(new Vector3(0, -1.7f / (settings.Hitpoints - 1), 0));
+        this.transform.Translate(new Vector3(0, -1.7f / (GameRuleSettings.Instance.Tower.Hitpoints - 1), 0));
     }
 
     private void ExplodeHit()

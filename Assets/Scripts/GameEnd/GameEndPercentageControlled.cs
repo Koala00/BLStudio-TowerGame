@@ -8,20 +8,19 @@ class GameEndPercentageControlled : ICheckGameEnd
 {
     public int Percentage = 80;
 
-    private GridPositionElements PositionElements;
+    private GridPositionElements GridPositionElements;
 
-    public GameEndPercentageControlled(GridPositionElements positionElements)
+    public GameEndPercentageControlled(GridPositionElements gridPositionElements)
     {
-        PositionElements = positionElements;
+        GridPositionElements = gridPositionElements;
     }
 
     public Text ProgressLabel { get; set; }
 
     public bool IsGameEnd()
     {
-        int[] scores = PositionElements.GetNumberOfControlledPositionsPerPlayer();
-        var boardSettings = GlobalSettings.Instance.gameRuleSettings.Board;
-        int totalPositions = boardSettings.Width * boardSettings.Height;
+        int[] scores = GridPositionElements.GetNumberOfControlledPositionsPerPlayer();
+        int totalPositions = GameRuleSettings.Instance.Board.Width * GameRuleSettings.Instance.Board.Height;
         int maxScore = totalPositions * Percentage / 100;
         int score = scores.Max();
         ProgressLabel.text = String.Format("Highest score: {0} - Game end score: {1}", score, maxScore);

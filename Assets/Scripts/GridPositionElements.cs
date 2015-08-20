@@ -150,8 +150,7 @@ public class GridPositionElements : MonoBehaviour
         control.TowerOfPlayer = player;
 
         // recalculate position controls
-        var settings = GlobalSettings.Instance.gameRuleSettings.Tower;
-        foreach (var neighbor in ControlledPositionsAround(position, settings.ControlDistance))
+        foreach (var neighbor in ControlledPositionsAround(position, GameRuleSettings.Instance.Tower.ControlDistance))
         {
             neighbor.IncreaseControl(player);
         }
@@ -165,8 +164,7 @@ public class GridPositionElements : MonoBehaviour
             control.TowerOfPlayer = Player.NoPlayer;
 
         // recalculate position controls
-        var settings = GlobalSettings.Instance.gameRuleSettings.Tower;
-        foreach (var neighbor in ControlledPositionsAround(position, settings.ControlDistance))
+        foreach (var neighbor in ControlledPositionsAround(position, GameRuleSettings.Instance.Tower.ControlDistance))
         {
             neighbor.DecreaseControl(player);
         }
