@@ -17,6 +17,9 @@ http://wiki.unity3d.com/index.php/Scripts/Controllers
 Detonator Explosion Framework,
 https://www.assetstore.unity3d.com/en/#!/content/1
 
+HexCoord.cs,
+https://github.com/tejon/HexCoord/blob/master/HexCoord.cs
+
 Post Apocalypse Guns Demo,
 https://www.assetstore.unity3d.com/en/#!/content/33515
 - subset selected; project cleaned
@@ -37,6 +40,3 @@ Yughues Free Metal Materials,
 https://www.assetstore.unity3d.com/en/#!/content/12949
 - subset selected; project cleaned
 
-
-HexCoord.cs,
-https://github.com/tejon/HexCoord/blob/master/HexCoord.cs
